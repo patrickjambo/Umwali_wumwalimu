@@ -1,0 +1,27 @@
+[
+  {
+    "number": 1,
+    "text": "Mu mugi, umuvuduko ntarengwa ni 50 km/h. Ibi ni ukuri?",
+    "options": [
+      { "key": "a", "text": "Nibyo" },
+      { "key": "b", "text": "Oya" },
+      { "key": "c", "text": "Biterwa n'imodoka" },
+      { "key": "d", "text": "Simbizi" }
+    ],
+    "correctKey": "a",
+    "category": "numeric"
+  },
+  {
+    "number": 2,
+    "text": "Iki cyapa kihagarika imodoka kigizwe n'uruziga rufite umupfundikizo w'umutuku. Ni ikihe?",
+    "options": [
+      { "key": "a", "text": "Icyapa cy'itegeko" },
+      { "key": "b", "text": "Icyapa cyo kuburira" },
+      { "key": "c", "text": "Icyapa cyo guhagarara" },
+      { "key": "d", "text": "Icyapa cyo gutanga inzira" }
+    ],
+    "correctKey": "c",
+    "category": "ibyapa",
+    "signSvg": "<svg width='120' height='120' viewBox='0 0 100 100'><circle cx='50' cy='50' r='40' stroke='red' stroke-width='8' fill='white'/><text x='50' y='56' text-anchor='middle' font-size='24'>STOP</text></svg>"
+  }
+]
