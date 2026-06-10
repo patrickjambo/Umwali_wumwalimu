@@ -4,7 +4,7 @@ import { anthropic } from '@ai-sdk/anthropic';
 export async function POST(req: Request) {
   const { questionText, correctAnswer, category } = await req.json();
 
-  const result = streamText({
+  const result = await streamText({
     model: anthropic('claude-3-opus-20240229'), // Updated to typical claude-3 model name
     system: `You are a friendly Rwandan traffic law instructor.
       Explain why the correct answer is right in simple Kinyarwanda

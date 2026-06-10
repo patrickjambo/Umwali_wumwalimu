@@ -5,7 +5,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function AdminQuestionsPage() {
   // Fetch some questions for demonstration
-  let qList;
+  let qList: (typeof questions.$inferSelect)[] = [];
   try {
      qList = await db.select().from(questions).orderBy(asc(questions.number)).limit(50);
   } catch (e) {

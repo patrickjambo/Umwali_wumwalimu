@@ -4,7 +4,7 @@ import { asc } from "drizzle-orm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function AdminStudentsPage() {
-  let studentList;
+  let studentList: (typeof users.$inferSelect)[] = [];
   try {
      studentList = await db.select().from(users).orderBy(asc(users.createdAt)).limit(100);
   } catch (e) {

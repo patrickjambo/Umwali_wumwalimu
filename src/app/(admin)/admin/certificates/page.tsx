@@ -4,7 +4,7 @@ import { eq, asc } from "drizzle-orm";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
 export default async function AdminCertificatesPage() {
-  let certList;
+  let certList: { user: typeof users.$inferSelect | null; id: string; userId: string; courseId: string; verifyCode: string; pdfUrl: string | null; issuedAt: Date | null }[] = [];
   try {
      const data = await db.select().from(certificates)
                           .leftJoin(users, eq(certificates.userId, users.id))

@@ -10,7 +10,7 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
-  const [scoreData, setScoreData] = useState<{score: number, passed: boolean} | null>(null);
+  const [scoreData, setScoreData] = useState<{score: number, passed: boolean, correct: number, total: number} | null>(null);
   const [aiExplanationIdx, setAiExplanationIdx] = useState<number | null>(null);
 
   const { completion, complete, isLoading } = useCompletion({

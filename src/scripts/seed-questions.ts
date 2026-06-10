@@ -53,7 +53,7 @@ async function seed() {
       text: q.text,
       options: JSON.stringify(q.options),
       correctKey: q.correctKey,
-      category: q.category,
+      category: q.category as 'text' | 'numeric' | 'ibyapa',
       explanation: q.explanation || `Igisubizo ni ${q.correctKey.toUpperCase()}`,
       signImageUrl: q.image || null
     }));
