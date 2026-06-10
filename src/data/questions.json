@@ -193,23 +193,23 @@
   },
   {
     "number": 10,
-    "text": "Icyapa cyerekana umuvuduko ntarengwa ikinyabiziga kitagomba kurenza gishyirwa gusa ku binyabiziga bifite uburemere ntarengwa",
+    "text": "Icyapa cyerekana umuvuduko ntarengwa ikinyabiziga kitagomba kurenza gishyirwa gusa ku binyabiziga bifite uburemere ntarengwa bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "ukurikira:"
-      },
-      {
-        "key": "b",
         "text": "Burenga toni 1"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "Burenga toni 2"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "Burenga toni 24"
+      },
+      {
+        "key": "d",
+        "text": "Nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -217,7 +217,7 @@
   },
   {
     "number": 12,
-    "text": "Umuyobozi ugenda mu muhanda igihe ubugari bwawo budatuma anyuranaho nta nkomyi ashobora kunyura mu kayira k’abanyamaguru riko amaze kureba ibi bikurikira:",
+    "text": "Umuyobozi ugenda mu muhanda igihe ubugari bwawo budatuma anyuranaho nta nkomyi ashobora kunyura mu kayira k’abanyamaguru ariko amaze kureba ibi bikurikira:",
     "options": [
       {
         "key": "a",
@@ -241,7 +241,7 @@
   },
   {
     "number": 13,
-    "text": "Ku byerekeye kwerekana ibinyabiziga n’ukumurika kwabyo ndetse no kwerekana ihindura ry’ibyerekezo byabyo. Birabujijwe gukora ndi matara cyangwa utugarurarumuri uretse ibitegetswe ariko ntibireba amatara akurikira:",
+    "text": "Ku byerekeye kwerekana ibinyabiziga n’ukumurika kwabyo ndetse no kwerekana ihindura ry’ibyerekezo byabyo. Birabujijwe gukora andi matara cyangwa utugarurarumuri uretse ibitegetswe ariko ntibireba amatara akurikira:",
     "options": [
       {
         "key": "a",
@@ -457,23 +457,23 @@
   },
   {
     "number": 23,
-    "text": "Iyo umuvuduko w’ibinyabiziga bidapakiye ushobora kurenga km50 mu isaha ahategamye, bigomba kuba bifite ibikoresho by’ihoni",
+    "text": "Iyo umuvuduko w’ibinyabiziga bidapakiye ushobora kurenga km50 mu isaha ahategamye, bigomba kuba bifite ibikoresho by’ihoni byumvikanira mu ntera:",
     "options": [
       {
         "key": "a",
-        "text": "yumvikanira mu ntera:"
-      },
-      {
-        "key": "b",
         "text": "Metero 100"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "Metero 200"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "Metero 50"
+      },
+      {
+        "key": "d",
+        "text": "Metero 150"
       }
     ],
     "correctKey": "c",
@@ -517,7 +517,7 @@
       },
       {
         "key": "c",
-        "text": "Ipikipiki ifite akanyabiziga kometse ku"
+        "text": "Ipikipiki ifite akanyabiziga kometse ku ruhande rwayo"
       },
       {
         "key": "d",
@@ -771,23 +771,23 @@
   },
   {
     "number": 37,
-    "text": "Ibizirikisho by’iminyururu cyangwa by’insinga kimwe n’ibindi by’ingoboka bikoreshwa gusa igihe nta kundi umuntu yabigenza kandi nta kindi bigiriwe uretse gusa kugirango ikinyabiziga kigere aho kigomba gukorerwa kandi nturenze na rimwe km 20 mu isaha, ibyo",
+    "text": "Ibizirikisho by’iminyururu cyangwa by’insinga kimwe n’ibindi by’ingoboka bikoreshwa gusa igihe nta kundi umuntu yabigenza kandi nta kindi bigiriwe uretse gusa kugirango ikinyabiziga kigere aho kigomba gukorerwa kandi nturenze na rimwe km 20 mu isaha, ibyo bizirikisho bigaragazwa ku buryo bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "izirikisho bigaragazwa ku buryo bukurikira:"
-      },
-      {
-        "key": "b",
         "text": "Agatambaro gatukura kuri cm 50 z’umuhanda"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "Ikimenyetso cy’itara risa n’icunga rihishije"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "Icyapa cyera cya mpande enye zingana gifite cm 20 kuri buri ruhande"
+      },
+      {
+        "key": "d",
+        "text": "Nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -795,23 +795,23 @@
   },
   {
     "number": 38,
-    "text": "Uretse mu mujyi, ku yindi mihanda yajyenwe na minisitiri ushinzwe gutwara abantu n’ibintu, uburemere ntarengwa ku binyabiziga",
+    "text": "Uretse mu mujyi, ku yindi mihanda yajyenwe na minisitiri ushinzwe gutwara abantu n’ibintu, uburemere ntarengwa ku binyabiziga bifite imitambiko itatu cyangwa irenga hatarimo makuzungu ni :",
     "options": [
       {
         "key": "a",
-        "text": "ifite imitambiko itatu cyangwa irenga hatarimo makuzungu ni :"
-      },
-      {
-        "key": "b",
         "text": "Toni 10"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "Toni 12"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "Toni 16"
+      },
+      {
+        "key": "d",
+        "text": "Toni 24"
       }
     ],
     "correctKey": "c",
@@ -939,23 +939,23 @@
   },
   {
     "number": 44,
-    "text": "Iyo bwije kugeza bukeye cyangwa bitewe n’uko ibihe bimeze nk’igihe cy’ibihu cyangwa cy’imvura bitagishoboka kubona neza muri m 200, udutsiko twose tw’abanyamaguru nk’imperekerane cyangwa udutsiko tw’abanyeshuri bari ku murongo bayobowe n’umwarimu, iyo",
+    "text": "Iyo bwije kugeza bukeye cyangwa bitewe n’uko ibihe bimeze nk’igihe cy’ibihu cyangwa cy’imvura bitagishoboka kubona neza muri m 200, udutsiko twose tw’abanyamaguru nk’imperekerane cyangwa udutsiko tw’abanyeshuri bari ku murongo bayobowe n’umwarimu, iyo bagenda mu muhanda ku isonga hakaba hari abantu barenze umwe bagomba kugaragazwa kuburyo bukurikira :",
     "options": [
       {
         "key": "a",
-        "text": "agenda mu muhanda ku isonga hakaba hari abantu barenze umwe bagomba kugaragazwa kuburyo bukurikira :"
-      },
-      {
-        "key": "b",
         "text": "Imbere ni itara ry’umuhondo ritwariwe ibumoso"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "Inyuma ni itara ryera ritwariwe ibumoso n’umuntu uri ku murongo w’inyuma hafi y’umurongo ugabanya umuhanda mo kabiri"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "A na B ni ibisubizo by’ukuri"
+      },
+      {
+        "key": "d",
+        "text": "Nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -1083,7 +1083,7 @@
   },
   {
     "number": 50,
-    "text": "Iyo ikinyabiziga gifite amatara abiri cyangwa menshi y’ubwoko bumwe ayo matara agomba kugira ibara rimwe n’ingufu zingana kandi kagomba gushyirwaho ku buryo buteganye uhereye ku murongo ugabanya ikinyabizigamo kabiri mu burebure bwacyo. Ariko ibi",
+    "text": "Iyo ikinyabiziga gifite amatara abiri cyangwa menshi y’ubwoko bumwe ayo matara agomba kugira ibara rimwe n’ingufu zingana kandi akagomba gushyirwaho ku buryo buteganye uhereye ku murongo ugabanya ikinyabizigamo kabiri mu burebure bwacyo. Ariko ibi ntibikurikizwa ku matara akurikira:",
     "options": [
       {
         "key": "a",
@@ -1227,23 +1227,23 @@
   },
   {
     "number": 57,
-    "text": "Ibinyabiziga bihinga n’ibindi bikoresho byihariye bikoreshwa n’ibigo bipatana imirimo, iyo bigenda mu nzira nyabagendwa igihe cya nijoro cyangwa bitewe n’uko ibihe bimeze bitagishoboka kubona neza muri m 200 bishobora kugaragazwa inyuma n’amatara 2 atukura,",
+    "text": "Ibinyabiziga bihinga n’ibindi bikoresho byihariye bikoreshwa n’ibigo bipatana imirimo, iyo bigenda mu nzira nyabagendwa igihe cya nijoro cyangwa bitewe n’uko ibihe bimeze bitagishoboka kubona neza muri m 200 bishobora kugaragazwa inyuma n’amatara 2 atukura, bipfa kuba bitarenza ibipimo bikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "ipfa kuba bitarenza ibipimo bikurikira:"
-      },
-      {
-        "key": "b",
         "text": "kutarenza umuvuduko wa km20 mu isaha"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "uburebure bwabyo habariwemo ibyo bitwaye bukaba butarengeje m6"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "uburebure ntarengwa ntiburenga m8"
+      },
+      {
+        "key": "d",
+        "text": "A na B nibyo bisubizo by’ukuri"
       }
     ],
     "correctKey": "d",
@@ -1299,23 +1299,23 @@
   },
   {
     "number": 60,
-    "text": "Iyo amatara y’ikinyabiziga agomba gucanwa kandi igihe imizigo isumba impera y’ikinyabiziga ho metero irenga igice gihera",
+    "text": "Iyo amatara y’ikinyabiziga agomba gucanwa kandi igihe imizigo isumba impera y’ikinyabiziga ho metero irenga igice gihera cy’imizigo kigaragazwa ku buryo bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "y’imizigo kigaragazwa ku buryo bukurikira:"
-      },
-      {
-        "key": "b",
         "text": "itara ritukura cyangwa akagarurarumuri ku mutuku ku manywa"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "agatambaro gatukura gafite nibura cm 50 z’uruhande mu ijoro"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "itara ry’umuhondo cyangwa akagarurarumuri k’umuhondo"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -1347,26 +1347,26 @@
   },
   {
     "number": 62,
-    "text": "Uretse mu mijyi kuyindi mihanda yagenywe na minisiteri ushinzwe gutwara ibintu n’abantu, uburemere ntarengwa bwemewe ku",
+    "text": "Uretse mu mijyi kuyindi mihanda yagenywe na minisiteri ushinzwe gutwara ibintu n’abantu, uburemere ntarengwa bwemewe ku binyabiziga bifatanye bifite imitambiko itatu ni:",
     "options": [
       {
         "key": "a",
-        "text": "inyabiziga bifatanye bifite imitambiko itatu ni:"
-      },
-      {
-        "key": "b",
         "text": "toni 20"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "toni 16"
+      },
+      {
+        "key": "c",
+        "text": "toni 12"
       },
       {
         "key": "d",
         "text": "toni 10"
       }
     ],
-    "correctKey": "a",
+    "correctKey": "c",
     "explanation": "Igisubizo ni A"
   },
   {
@@ -1419,23 +1419,23 @@
   },
   {
     "number": 67,
-    "text": "Romoruki zifite ubugari ntarengwa bwa cm 80 zishobora gushyirwaho akagarurarumuri kamwe gusa iyo zikuruwe n’ibinyabiziga",
+    "text": "Romoruki zifite ubugari ntarengwa bwa cm 80 zishobora gushyirwaho akagarurarumuri kamwe gusa iyo zikuruwe n’ibinyabiziga bikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "ikurikira:"
-      },
-      {
-        "key": "b",
         "text": "velomoteri"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "ipikipiki idafite akanyabiziga ku ruhande"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "amavatiri y’ifasi"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "b",
@@ -1491,23 +1491,23 @@
   },
   {
     "number": 72,
-    "text": "Iyo kuva bwije kugeza bukeye cyangwa bitewe nuko ibihe bimeze nk’igihe cy’igihu cyangwa cy’imvura bitagishoboka kubona neza muri m 200, imirongo y’ingabo z’igihugu zigendera kuri gahunda n’utundi dutsiko twose tw’abanyamaguru nk’imperekerane cyangwa udutsiko tw’abanyeshuri bari ku murongo bayobowe na mwarimu, iyo bagenda mu muhanda ku isonga hakaba hari abantu barenze umwe,",
+    "text": "Iyo kuva bwije kugeza bukeye cyangwa bitewe nuko ibihe bimeze nk’igihe cy’igihu cyangwa cy’imvura bitagishoboka kubona neza muri m 200, imirongo y’ingabo z’igihugu zigendera kuri gahunda n’utundi dutsiko twose tw’abanyamaguru nk’imperekerane cyangwa udutsiko tw’abanyeshuri bari ku murongo bayobowe na mwarimu, iyo bagenda mu muhanda ku isonga hakaba hari abantu barenze umwe, bagaragzwa ku buryo bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "agaragzwa ku buryo bukurikira:"
+        "text": "imbere ni itara ryera ritwariwe ku ruhande rw’ibumoso n’umuntu uri ku murongo w’imbere hafi y’umurongo ugabanya umuhanda mo kabiri"
       },
       {
         "key": "b",
-        "text": "imbere ni itara ryera ritwariwe ku ruhande rw’ibumoso n’umuntu uri ku murongo w’imbere hafi y’umurongo ugabanya"
+        "text": "inyuma ni itara umuhondo ritwariwe ku ruhande rw’ibumoso n’umuntu uri ku murongo w’inyuma hafi y’umurongo ugabanya umuhanda mo kabiri"
       },
       {
         "key": "c",
-        "text": "inyuma ni itara umuhondo ritwariwe ku ruhande rw’ibumoso n’umuntu uri ku murongo w’inyuma hafi y’umurongo ugabanya umuhanda"
+        "text": "A na B ni ibisubizo by’ukuri"
       },
       {
         "key": "d",
-        "text": "A na B ni ibisubizo by’ukuri"
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "a",
@@ -1563,23 +1563,23 @@
   },
   {
     "number": 75,
-    "text": "Nta tara na rimwe cyangwa utugarurarumuri bishobora kuba bifunze kuburyo igice cyabyo cyo hasi cyane kimurika kitaba kiri hasi ya",
+    "text": "Nta tara na rimwe cyangwa utugarurarumuri bishobora kuba bifunze kuburyo igice cyabyo cyo hasi cyane kimurika kitaba kiri hasi ya cm 40 kuva ku butaka igihe ikinyabiziga kidapakiye ariko ibyo ntibikurikizwa ku matara akurikira:",
     "options": [
       {
         "key": "a",
-        "text": "m 40 kuva ku butaka igihe ikinyabiziga kidapakiye ariko ibyo ntibikurikizwa ku matara akurikira:"
-      },
-      {
-        "key": "b",
         "text": "amatara kamenabihu"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "amatara yo gusubira inyuma"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "A na B ni ibisubizo by’ukuri"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "c",
@@ -1875,7 +1875,7 @@
   },
   {
     "number": 93,
-    "text": "Icyapa cyerekana ahantu hagenewe guhagararwamo n’imodoka nini zagenewe gutwara abantu cyirangwa n’ubuso bw’amabara kurikira:",
+    "text": "Icyapa cyerekana ahantu hagenewe guhagararwamo n’imodoka nini zagenewe gutwara abantu cyirangwa n’ubuso bw’amabara akurikira:",
     "options": [
       {
         "key": "a",
@@ -1971,23 +1971,23 @@
   },
   {
     "number": 98,
-    "text": "Ibinyabiziga biherekeranyije mu butumwa ntibishobora gutonda uburebure burenga umurongo wa m 500. Iyi bibaye bityo ibinyabiziga",
+    "text": "Ibinyabiziga biherekeranyije mu butumwa ntibishobora gutonda uburebure burenga umurongo wa m 500. Iyi bibaye bityo ibinyabiziga biherekeranye mu butumwa bishobora kugabanwamo amatsinda atonze umurongo atarengeje m 50 z’uburebure kdi hagati yayo hakaba byibura m 50 ariko ibyo ntibikurikizwa kubinyabiziga bikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "iherekeranye mu butumwa bishobora kugabanwamo amatsinda atonze umurongo atarengeje m 50 z’uburebure kdi hagati yayo hakaba"
-      },
-      {
-        "key": "b",
-        "text": "yibura m 50 ariko ibyo ntibikurikizwa kubinyabiziga bikurikira:"
-      },
-      {
-        "key": "c",
         "text": "ibinyabiziga bya police biherekeranyije"
       },
       {
-        "key": "d",
+        "key": "b",
         "text": "ibinyabiziga by’abasirikare biherekeranyije mu nsisiro"
+      },
+      {
+        "key": "c",
+        "text": "A na B ni ibisubizo by’ukuri"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "b",
@@ -2043,7 +2043,7 @@
   },
   {
     "number": 101,
-    "text": "Icyapa cy’inyongera kigaragaza ikibanza cy’ingando cyangwa cy’abantu benshi bagendera ku nyamaswa kirangwa n’amabara kurikira:",
+    "text": "Icyapa cy’inyongera kigaragaza ikibanza cy’ingando cyangwa cy’abantu benshi bagendera ku nyamaswa kirangwa n’amabara akurikira:",
     "options": [
       {
         "key": "a",
@@ -2139,23 +2139,23 @@
   },
   {
     "number": 105,
-    "text": "Icyapa cyerekana ko hari amabwiriza yihariye mu buryo bwo kugendera mu cyambu cyangwa ku kibuga cy’indege giteye ku buryo",
+    "text": "Icyapa cyerekana ko hari amabwiriza yihariye mu buryo bwo kugendera mu cyambu cyangwa ku kibuga cy’indege giteye ku buryo bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "ukurikira:"
-      },
-      {
-        "key": "b",
         "text": "ishusho mpandeshatu, ubuso mu ibara ryera, ikirango mu ibara ry’umukara"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "ishusho mpandenye, ubuso mu ibara ry’ubururu n’ikirango kiri mu ibara ryera"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "ishusho y’uruziga mu ibara ry’ubururu ni ikirango kiri mu ibara ryera"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "b",
@@ -2187,23 +2187,23 @@
   },
   {
     "number": 107,
-    "text": "Ibyapa byerekana icyago cyidahoraho kandi bigenewe kwerekana aho bagana cyangwa aho berekeza umuhanda nk’igihe",
+    "text": "Ibyapa byerekana icyago cyidahoraho kandi bigenewe kwerekana aho bagana cyangwa aho berekeza umuhanda nk’igihe cy’impanuka cyangwa hari imirimo ikorwa mu muhanda birangwa n’amabara akurikira:",
     "options": [
       {
         "key": "a",
-        "text": "y’impanuka cyangwa hari imirimo ikorwa mu muhanda birangwa n’amabara akurikira:"
-      },
-      {
-        "key": "b",
         "text": "umweru n’umukara"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "umweru n’umuhondo"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "ubuso bw’umweru gusa"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -2211,23 +2211,23 @@
   },
   {
     "number": 109,
-    "text": "Iyo kuva bwije kugeza bukeye cyangwa bitewe n’uko ibihe bimeze bitagishoboka kubona neza muri m 200, mu nzira nyabagendwa, romoruki iziritse kuri velomoteri cyangwa ipikipiki idafite akanyabiziga ku ruhande, uretse velomoteri idafite umuyobozi, kandi uburumbarare bwayo, cyangwa bw’ibyo yikoreye bukaba butuma itara ry’ikinyabiziga biyikurura ritagaragara, iyo romoruki igaragazwa ku",
+    "text": "Iyo kuva bwije kugeza bukeye cyangwa bitewe n’uko ibihe bimeze bitagishoboka kubona neza muri m 200, mu nzira nyabagendwa, romoruki iziritse kuri velomoteri cyangwa ipikipiki idafite akanyabiziga ku ruhande, uretse velomoteri idafite umuyobozi, kandi uburumbarare bwayo, cyangwa bw’ibyo yikoreye bukaba butuma itara ry’ikinyabiziga biyikurura ritagaragara, iyo romoruki igaragazwa ku buryo bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "uryo bukurikira:"
-      },
-      {
-        "key": "b",
         "text": "itara ryera riri kuri romoruki inyuma"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "itara ry’umuhondo riri kuri romoruki inyuma"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "itara risa n’icunga riri kuri romoruki inyuma"
+      },
+      {
+        "key": "d",
+        "text": "ibi bisubizo byose nibyo"
       }
     ],
     "correctKey": "d",
@@ -2235,23 +2235,23 @@
   },
   {
     "number": 111,
-    "text": "Iyo akanyabiziga gasunikwa cyangwa ibyo gatwaye bidatuma umuyobozi abona neza imbere ye, uwo muyobozi agomba gukora ibi",
+    "text": "Iyo akanyabiziga gasunikwa cyangwa ibyo gatwaye bidatuma umuyobozi abona neza imbere ye, uwo muyobozi agomba gukora ibi bikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "ikurikira:"
-      },
-      {
-        "key": "b",
         "text": "gushaka umuherekeza"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "gukurura ikinyabiziga cye"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "A na B ni ibisubizo by’ukuri"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "b",
@@ -2331,23 +2331,23 @@
   },
   {
     "number": 116,
-    "text": "Ibyapa byereka inkomane y’inzira nyabagendwa n’inzira ya gariyamoshi bigomba iteka kumurikwa cyangwa kugarura urumuri ku",
+    "text": "Ibyapa byereka inkomane y’inzira nyabagendwa n’inzira ya gariyamoshi bigomba iteka kumurikwa cyangwa kugarura urumuri ku buryo bigaragarira nibura mu ntera ikurikira igihe ijuru rikeye:",
     "options": [
       {
         "key": "a",
-        "text": "uryo bigaragarira nibura mu ntera ikurikira igihe ijuru rikeye:"
-      },
-      {
-        "key": "b",
         "text": "m200"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "m 250"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "m300"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -2355,23 +2355,23 @@
   },
   {
     "number": 117,
-    "text": "Imbibi ziri ku mpera z’ubwihugiko bw’abanyamaguru kandi ziri mu muhanda kimwe n’imbibi n’ibindi bikoresho bigenewe gutuma",
+    "text": "Imbibi ziri ku mpera z’ubwihugiko bw’abanyamaguru kandi ziri mu muhanda kimwe n’imbibi n’ibindi bikoresho bigenewe gutuma bagenda mu muhanda nta muvundo zisigwa irangi ry’ibara rikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "agenda mu muhanda nta muvundo zisigwa irangi ry’ibara rikurikira:"
-      },
-      {
-        "key": "b",
         "text": "irangi ry’umuhondo ngarurarumuri"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "irangi ry’umweru ngarurarumuri"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "irangi risa n’icunga rihishije ngarurarumuri"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "a",
@@ -2427,7 +2427,7 @@
   },
   {
     "number": 120,
-    "text": "Mu mujyi no ku mihanda y’igihugu igenwa na minisitiri ushinzwe gutwara abantu n’ibintu, ubwikorere ntarengwa ku ikamyo iyo riyo yose ntibushobora kurenga ibipimo bikurikira:",
+    "text": "Mu mujyi no ku mihanda y’igihugu igenwa na minisitiri ushinzwe gutwara abantu n’ibintu, ubwikorere ntarengwa ku ikamyo iyo ariyo yose ntibushobora kurenga ibipimo bikurikira:",
     "options": [
       {
         "key": "a",
@@ -2499,23 +2499,23 @@
   },
   {
     "number": 123,
-    "text": "Ikintu cyose cyatuma hahindurwa ibyanditse bireba nyirikarita cyangwa ibiranga ikinyabiziga kigomba kumenyeshwa ibiro",
+    "text": "Ikintu cyose cyatuma hahindurwa ibyanditse bireba nyirikarita cyangwa ibiranga ikinyabiziga kigomba kumenyeshwa ibiro by’umusoro haba mu magambo cyangwa mu ibaruwa ishinganye ibyo bikorwa mu gihe kingana gute:",
     "options": [
       {
         "key": "a",
-        "text": "y’umusoro haba mu magambo cyangwa mu ibaruwa ishinganye ibyo bikorwa mu gihe kingana gute:"
-      },
-      {
-        "key": "b",
         "text": "mu mezi 2"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "mu kwezi kumwe"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "mu minsi cumi n’itanu"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -2579,15 +2579,15 @@
       },
       {
         "key": "b",
-        "text": "iyo bibaye ngombwa no ku mpera y’amabondo y’ikinyabiziga cyangwa y’imitwaro ni itara ndangaburumbarare risa n’icunga rihishije"
+        "text": "iyo bibaye ngombwa no ku mpera y’amabondo y’ikinyabiziga cyangwa y’imitwaro ni itara ndangaburumbarare risa n’icunga rihishije cyangwa ry’umuhondo"
       },
       {
         "key": "c",
-        "text": "yangwa ry’umuhondo"
+        "text": "A na B ni ibisubizo by’ukuri"
       },
       {
         "key": "d",
-        "text": "A na B ni ibisubizo by’ukuri"
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "c",
@@ -2595,23 +2595,23 @@
   },
   {
     "number": 128,
-    "text": "Igice cy’umuhanda kiri hakurya y’umurongo mugari wera udacagaguye ugaragaza inkombe mpimbano y’umuhanda kiba kigenewe ibi",
+    "text": "Igice cy’umuhanda kiri hakurya y’umurongo mugari wera udacagaguye ugaragaza inkombe mpimbano y’umuhanda kiba kigenewe ibi bikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "ikurikira:"
-      },
-      {
-        "key": "b",
         "text": "guhagararwamo umwanya muto gusa"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "guhagararwamo umwanya muto n’umunini ndetse no kumihanda irombereje y’ibisate byinshi n’imihanda y’imodoka"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "A na B ni ibisubizo by’ukuri"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -2619,23 +2619,23 @@
   },
   {
     "number": 130,
-    "text": "Iminyururu n’ibindi byuma bifashisha bishobora kuvanwaho cyangwa binagana, hatabariwemo ibimenyetso byerekana ibyerekezo",
+    "text": "Iminyururu n’ibindi byuma bifashisha bishobora kuvanwaho cyangwa binagana, hatabariwemo ibimenyetso byerekana ibyerekezo bigomba gutungurwa ku kinyabiziga ku buryo igihe byizunguza bitarenga impande zihera uburumbarare bw’ikinyabiziga kandi ibyo byuma bifashisha ntibigomba gukururuka ku butaka ariko ibyo ntibibujijwe ku binyabiziga bikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "igomba gutungurwa ku kinyabiziga ku buryo igihe byizunguza bitarenga impande zihera uburumbarare bw’ikinyabiziga kandi ibyo byuma"
-      },
-      {
-        "key": "b",
-        "text": "ifashisha ntibigomba gukururuka ku butaka ariko ibyo ntibibujijwe ku binyabiziga bikurikira:"
-      },
-      {
-        "key": "c",
         "text": "imashini zihinga"
       },
       {
-        "key": "d",
+        "key": "b",
         "text": "ibinyabiziga bitwaye ibintu bidashobora gufata inkongi"
+      },
+      {
+        "key": "c",
+        "text": "A na B ni ibisubizo by’ukuri"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "a",
@@ -2691,23 +2691,23 @@
   },
   {
     "number": 133,
-    "text": "Gushyira mu muhanda ku buryo budasanzwe ibinyabiziga bikururana birenze bitatu bigomba gutangirwa uruhusa, uretse imashini ihinga iyo zigenda uregendo rutarenze km 25, ibinyabiziga bikururana bitwaye ibyamamazwa n’ibindi biteganwa n’iri teka ariko igiteranyo",
+    "text": "Gushyira mu muhanda ku buryo budasanzwe ibinyabiziga bikururana birenze bitatu bigomba gutangirwa uruhusa, uretse imashini ihinga iyo zigenda uregendo rutarenze km 25, ibinyabiziga bikururana bitwaye ibyamamazwa n’ibindi biteganwa n’iri teka ariko igiteranyo cy’uburebure bw’ibyo binyabiziga bikururana ntigishobora kurenga ibipimo bikurikira:",
     "options": [
       {
         "key": "a",
-        "text": "y’uburebure bw’ibyo binyabiziga bikururana ntigishobora kurenga ibipimo bikurikira:"
-      },
-      {
-        "key": "b",
         "text": "m50"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "m35"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "m25"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "c",
@@ -2931,23 +2931,23 @@
   },
   {
     "number": 175,
-    "text": "Ikintu cyose cyatuma hahindurwa ibyanditswe bireba nyirikarita cyangwa ibiranga ikinyabiziga kigomba kumenyeshwa ibiro",
+    "text": "Ikintu cyose cyatuma hahindurwa ibyanditswe bireba nyirikarita cyangwa ibiranga ikinyabiziga kigomba kumenyeshwa ibiro by’imisoro haba mu magambo cyangwa mu ibaruwa ishinganye. Ibyo bikorwa mu gihe kingana gute:",
     "options": [
       {
         "key": "a",
-        "text": "y’imisoro haba mu magambo cyangwa mu ibaruwa ishinganye. Ibyo bikorwa mu gihe kingana gute:"
-      },
-      {
-        "key": "b",
         "text": "mu minsi 5"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "mu minsi 8"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "mu minsi 15"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "b",
@@ -3027,23 +3027,23 @@
   },
   {
     "number": 179,
-    "text": "Icyapa cyerekana umuvuduko ntarengwa ikinyabiziga kitagomba kurenza gishyirwa ku binyabiziga bifite uburebure ntarengwa",
+    "text": "Icyapa cyerekana umuvuduko ntarengwa ikinyabiziga kitagomba kurenza gishyirwa ku binyabiziga bifite uburebure ntarengwa bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "ukurikira:"
-      },
-      {
-        "key": "b",
         "text": "burenga toni 1"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "burenga toni 2"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "burenga toni 24"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -3291,23 +3291,23 @@
   },
   {
     "number": 194,
-    "text": "Iyo ikinyabiziga kitagikora cyangwa cyoherejwe mu mahanga burundu ibyapa ndanga bigomba gukurwaho bikoherezwa mu biro",
+    "text": "Iyo ikinyabiziga kitagikora cyangwa cyoherejwe mu mahanga burundu ibyapa ndanga bigomba gukurwaho bikoherezwa mu biro by’imisoro, ibyo bikorwa mu gihe kingana gute:",
     "options": [
       {
         "key": "a",
-        "text": "y’imisoro, ibyo bikorwa mu gihe kingana gute:"
-      },
-      {
-        "key": "b",
         "text": "ibyumweru bibiri"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "amezi abiri"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "ukwezi kumwe"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "b",
@@ -3363,23 +3363,23 @@
   },
   {
     "number": 197,
-    "text": "Ku mihanda yagenwe na minisitiri ubifite mu nshingano ibyapa biburira n’ibyapa byerekana bigomba kugaragazwa kuva bwije kugera",
+    "text": "Ku mihanda yagenwe na minisitiri ubifite mu nshingano ibyapa biburira n’ibyapa byerekana bigomba kugaragazwa kuva bwije kugera bukeye n’urumuri rwihariye cyangwa amatara ku mihanda cyangwa ibintu ngarurarumuri. Igihe ijuru rikeye intera y’ahagaragara igomba kuba nibura:",
     "options": [
       {
         "key": "a",
-        "text": "ukeye n’urumuri rwihariye cyangwa amatara ku mihanda cyangwa ibintu ngarurarumuri. Igihe ijuru rikeye intera y’ahagaragara igomba"
-      },
-      {
-        "key": "b",
         "text": "m50"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "m120"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "m150"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -3387,23 +3387,23 @@
   },
   {
     "number": 198,
-    "text": "Ibizirikisho by’iminyururu cyangwa by’insinga kimwe n’ibindi by’ingoboka bikoreshwa gusa igihe nta kundi umuntu yabigenza kandi nta kindi bigiriwe uretse gusa kugirango ikinyabiziga kigere aho kigomba gukorerwa kandi nturenze na rimwe km 20 mu isaha, ibyo",
+    "text": "Ibizirikisho by’iminyururu cyangwa by’insinga kimwe n’ibindi by’ingoboka bikoreshwa gusa igihe nta kundi umuntu yabigenza kandi nta kindi bigiriwe uretse gusa kugirango ikinyabiziga kigere aho kigomba gukorerwa kandi nturenze na rimwe km 20 mu isaha, ibyo bizirikisho bigaragazwa ku buryo bukurikira:",
     "options": [
       {
         "key": "a",
-        "text": "izirikisho bigaragazwa ku buryo bukurikira:"
-      },
-      {
-        "key": "b",
         "text": "agatambaro gatukura kuri cm 50 z’umuhanda"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "ikimenyetso cy’itara risa n’icunga rihishije"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "icyapa cyera cya mpande enye zingana gifite cm 30 kuri buri ruhande"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "c",
@@ -3411,23 +3411,23 @@
   },
   {
     "number": 199,
-    "text": "Uretse mu mijyi, kuyindi mihanda yagenywe na minisiteri ushinzwe gutwara ibintu n’abantu, uburemere ntarengwa bwemewe ku",
+    "text": "Uretse mu mijyi, kuyindi mihanda yagenywe na minisiteri ushinzwe gutwara ibintu n’abantu, uburemere ntarengwa bwemewe ku binyabiziga bifatanye bifite imitambiko itatu ni:",
     "options": [
       {
         "key": "a",
-        "text": "inyabiziga bifatanye bifite imitambiko itatu ni:"
-      },
-      {
-        "key": "b",
         "text": "toni 12"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "toni 16"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "toni 10"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "a",
@@ -3435,23 +3435,23 @@
   },
   {
     "number": 200,
-    "text": "Uretse mu mujyi kuyindi mihanda yajyenwe na minisitiri ushinzwe gutwara abantu n’ibintu, uburemere ntarengwa ku binyabiziga",
+    "text": "Uretse mu mujyi kuyindi mihanda yajyenwe na minisitiri ushinzwe gutwara abantu n’ibintu, uburemere ntarengwa ku binyabiziga bifite imitambiko itatu cyangwa irenga hatarimo mukuzungu ni :",
     "options": [
       {
         "key": "a",
-        "text": "ifite imitambiko itatu cyangwa irenga hatarimo mukuzungu ni :"
-      },
-      {
-        "key": "b",
         "text": "toni 10"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "toni 12"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "toni 15"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",
@@ -3539,7 +3539,7 @@
       },
       {
         "key": "b",
-        "text": "inyuma ni itara ryumutuku ritwariwe ibumoso n’umuntu uri ku murongo w’inyuma hafi y’umurongo ugabanya umuhanda mo"
+        "text": "inyuma ni itara ryumutuku ritwariwe ibumoso n’umuntu uri ku murongo w’inyuma hafi y’umurongo ugabanya umuhanda mo kabiri"
       },
       {
         "key": "c",
@@ -3680,19 +3680,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Kwitaba cyangwa guhagarara ako kanya"
+        "text": "Gutanga ikimenyetso cy’ukuboko no gukoresha amatara ndangacyerekezo."
       },
       {
         "key": "b",
-        "text": "kutayitaba"
+        "text": "Itegereze neza niba icyapa kikwemerera guhindura icyerekezo."
       },
       {
         "key": "c",
-        "text": "Gushyira imodoka iruhande ukayitaba"
+        "text": "A na B n’ibisubizo by’ukuri"
       },
       {
         "key": "d",
-        "text": "B na c ni ibisubizo byukuri"
+        "text": "Nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "c",
@@ -3704,44 +3704,40 @@
     "options": [
       {
         "key": "a",
-        "text": "Nyuma y’ikona ugategereza kubona uburyo bwo kunyuranaho."
+        "text": "Bituma ubasha gukata ikorosi vuba."
       },
       {
         "key": "b",
-        "text": "Mumuhanda w’icyerekezo kimwe"
+        "text": "Bifasha umuyobozi wa romoruki kukurebera mundorerwamo."
       },
       {
         "key": "c",
-        "text": "Aho utagomba kurenza ibirometero 30 mu isaha."
+        "text": "Bifasha romoruki guhagarara byoroshye."
       },
       {
         "key": "d",
-        "text": "Ugeze mumuhanda utaringaniye neza"
+        "text": "Bikurinda umuyaga."
       }
     ],
-    "correctKey": "d",
+    "correctKey": "c",
     "explanation": "Igisubizo ni D",
     "image": "data:image/jpeg;base64,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"
   },
   {
     "number": 228,
-    "text": "Niki ugomba gukora igihe uhagaze ku muhanda igihe cy’ibihu? Kureka amatara ndanga akaguma yaka",
+    "text": "Niki ugomba gukora igihe uhagaze ku muhanda igihe cy’ibihu?",
     "options": [
       {
         "key": "a",
-        "text": "Kureka amatara yo k,ubisikana na kamena-bihu akaguma yaka"
+        "text": "Umuvuduko ntarengwa 30 km/h"
       },
       {
         "key": "b",
-        "text": "Kureka amatara yo kubisikana akaguma yaka"
+        "text": "Iherezo ry’Umuvuduko muto utegetswe"
       },
       {
         "key": "c",
-        "text": "Kureka amatara y’urugendo akaguma yaka"
-      },
-      {
-        "key": "d",
-        "text": "Umuvuduko ntarengwa 30 km/h"
+        "text": "Umuvuduko uri hejuru 30 km/h"
       }
     ],
     "correctKey": "b",
@@ -3825,11 +3821,11 @@
   },
   {
     "number": 233,
-    "text": "N’uwuhe muntu ushobora gusimbura ibimenyetso byo mumuhanda, dutegetswe kubaha?",
+    "text": "N'uwuhe muntu ushobora gusimbura ibimenyetso byo mumuhanda, dutegetswe kubaha?",
     "options": [
       {
         "key": "a",
-        "text": "Umuyobozi w’ikinyamitende"
+        "text": "Umuyobozi w'ikinyamitende"
       },
       {
         "key": "b",
@@ -3853,19 +3849,19 @@
     "options": [
       {
         "key": "a",
-        "text": "(b)"
-      },
-      {
-        "key": "b",
-        "text": ""
-      },
-      {
-        "key": "c",
         "text": "Uburenganzira bwo gutambuka mbere"
       },
       {
-        "key": "d",
+        "key": "b",
         "text": "Nta kinyabiziga kigendeshwa na moteri"
+      },
+      {
+        "key": "c",
+        "text": "ibyerekezo bibiri by’umuhanda"
+      },
+      {
+        "key": "d",
+        "text": "Birabujijwe kunyuranaho"
       }
     ],
     "correctKey": "d",
@@ -3878,19 +3874,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Umuvuduko ntarengwa wemewe"
+        "text": "Iteme ridahoraho"
       },
       {
         "key": "b",
-        "text": "Iherezo ry’ibyo wabuzwaga"
+        "text": "Umuhanda utaringaniye"
       },
       {
         "key": "c",
-        "text": "Guhagarara umwanya munini n’umwanya moto ntibyemewe"
+        "text": "Umuhanda w’injira mu kuzimu"
       },
       {
         "key": "d",
-        "text": "Birabujijwe kuhinjira"
+        "text": "Ubutaka bworoshye"
       }
     ],
     "correctKey": "b",
@@ -3930,19 +3926,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Iherezo Ry’inzira Y’abanyamaguru"
+        "text": "Inzira y’abanyeshuri"
       },
       {
         "key": "b",
-        "text": "Iherezo Ry’umuhanda Urombereje W’ibice Byinshi"
+        "text": "Abanyamaguru ntibemerewe"
       },
       {
         "key": "c",
-        "text": "A Na B Ni Ibisubizo By’ukuri"
+        "text": "Agace k’abanyamaguru nta kinyabiziga"
       },
       {
         "key": "d",
-        "text": "Nta nzira ihari"
+        "text": "Hegereye aho abanyamaguru bambukira"
       }
     ],
     "correctKey": "d",
@@ -4032,15 +4028,15 @@
     "options": [
       {
         "key": "a",
-        "text": ""
+        "text": "b)"
       },
       {
-        "key": "b",
+        "key": "c",
         "text": "(d)"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A"
+    "correctKey": "d",
+    "explanation": "Igisubizo ni D"
   },
   {
     "number": 250,
@@ -4048,19 +4044,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Ahegereye amasangano y’inzira nyabagendwa n’inzira ya gari ya moshi ibambiye"
+        "text": "Umuhanda wubatswe nabi"
       },
       {
         "key": "b",
-        "text": "Inzira ibambiye imbere"
+        "text": "Agacuri kateza ibyago"
       },
       {
         "key": "c",
-        "text": "Inzira itabambiye itanafunze"
+        "text": "Umuhanda utaringaniye"
       },
       {
         "key": "d",
-        "text": "Imbere hari ikiraro cy’amatungo"
+        "text": "Akazamuko gahanamye"
       }
     ],
     "correctKey": "b",
@@ -4175,18 +4171,14 @@
     "options": [
       {
         "key": "a",
-        "text": "Birabujijwe kuwurenga"
-      },
-      {
-        "key": "b",
         "text": "Birabujijwe kuhahagarara"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "Wegereye ahaguteza ibyago"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "Kunyuranaho ntibyemewe"
       }
     ],
@@ -4282,7 +4274,7 @@
       },
       {
         "key": "c",
-        "text": "Ahegereye amasangano y’inzira"
+        "text": "Ahegereye amasangano y’inzira nyabagendwa n’inzira ya gari ya moshi hatabambiye"
       },
       {
         "key": "d",
@@ -4300,19 +4292,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Biragoye kubona neza mu muhanda munini"
+        "text": "Guhagarika ibinyabiziga bindi no kubasaba ubufasha"
       },
       {
         "key": "b",
-        "text": "Umuvuduko mu muhanda munini wavanyweho"
+        "text": "A na b ni ibisubizo by’ukuri"
       },
       {
         "key": "c",
-        "text": "Ni mwisangano ry’umuhanda rikoreshwa cyane"
+        "text": "Nta gisubizo cy’ukuri"
       },
       {
         "key": "d",
-        "text": "Hari imirongo iburira ibyago bitunguranye"
+        "text": "Ntagisubizo cy’ukuri 265.Ugeze ahabereye impanuka yo mumuhanda bwambere ugasanga abakomeretse bikomeye. wakiriza icyarimwe amatara y’ibyerekezo byombi, niki kindi ushobora gukora?"
       }
     ],
     "correctKey": "a",
@@ -4326,19 +4318,19 @@
     "options": [
       {
         "key": "a",
-        "text": ""
+        "text": "Icyemezo cy’iyandikwa ryi ikinyabiziga"
       },
       {
         "key": "b",
-        "text": ""
+        "text": "Uruhushya rwagateganyo"
       },
       {
         "key": "c",
-        "text": ""
+        "text": "Imikorere y’ikinyabiziga"
       },
       {
         "key": "d",
-        "text": ""
+        "text": "267.Wakoze impanuka yo mu muhanda , ni ikihe cyangombwa polisi ishobora kugusaba kucyerekana ?"
       }
     ],
     "correctKey": "b",
@@ -4400,18 +4392,14 @@
     "options": [
       {
         "key": "a",
-        "text": "ibyago"
-      },
-      {
-        "key": "b",
         "text": "ibibujijwe"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "ibitegetswe"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "ntagisubizo cy’ukuri kirimo"
       }
     ],
@@ -4652,19 +4640,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Icyapa A19"
+        "text": "utubuye dutaruka mu muhanda"
       },
       {
         "key": "b",
-        "text": "Icyapa B5"
+        "text": "umuhanda urimo amazi"
       },
       {
         "key": "c",
-        "text": "Icyapa B6"
+        "text": "umuhanda unyerera"
       },
       {
         "key": "d",
-        "text": "Ntagisubizo cy’ukuri kirimo"
+        "text": "a na b ni bisubizo by’ukuri"
       }
     ],
     "correctKey": "a",
@@ -4677,19 +4665,19 @@
     "options": [
       {
         "key": "a",
-        "text": "yego"
+        "text": "Icyapa B3"
       },
       {
         "key": "b",
-        "text": "yego usibye urugendo rurerure"
+        "text": "Icyapa A22 a"
       },
       {
         "key": "c",
-        "text": "yego usibye urugendo rugufi"
+        "text": "Icyapa A 20"
       },
       {
         "key": "d",
-        "text": "Oya"
+        "text": "Ibisubizo byose ni ukuri"
       }
     ],
     "correctKey": "a",
@@ -4727,19 +4715,19 @@
     "options": [
       {
         "key": "a",
-        "text": "yego"
+        "text": "Gukomeza ibumoso"
       },
       {
         "key": "b",
-        "text": "yego nyuma yo kuvuza ihoni"
+        "text": "Kuzimya ucana amatara maremare n’amagufi"
       },
       {
         "key": "c",
-        "text": "yego mu gihe nkurikiwe n’ibindi binyabiziga"
+        "text": "Kuzimya amatara maremare kugeza ikindi kinyabiziga gitambutse"
       },
       {
         "key": "d",
-        "text": "Oya"
+        "text": "Nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "c",
@@ -4748,23 +4736,23 @@
   },
   {
     "number": 299,
-    "text": "Igihe umuyobozi w’inyamaswa, afite inyamaswa idatuje, asaba ko ibinyabiziga bihagarara: Umuyobozi w’ikinyabiziga agomba guhagarara",
+    "text": "Igihe umuyobozi w’inyamaswa, afite inyamaswa idatuje, asaba ko ibinyabiziga bihagarara:",
     "options": [
       {
         "key": "a",
-        "text": "Umuyobozi w’ikinyabizigaagomba kuvuza ihoni agukomeza"
+        "text": "Amezi 6 kubinyabiziga bikora ubucuruzi"
       },
       {
         "key": "b",
-        "text": "Umuyobozi w’ikinyabiziga agomba kugabanya umuvuduko"
+        "text": "Amezi 12 ku binyabiziga bidakora ubucuruzi"
       },
       {
         "key": "c",
-        "text": "Ibisubizo byose ni ukuri"
+        "text": "Imyaka 2"
       },
       {
         "key": "d",
-        "text": "Ntugomba kujya mu kindi gice cy’umuhanda"
+        "text": "A na B ni ibisubizo by’ukuri"
       }
     ],
     "correctKey": "d",
@@ -4776,19 +4764,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Itonde , witegereze ni biba ngongwa ubaburire unitegura kuba wahagarara."
+        "text": "Vuza ihoni umenyesha umunyegare ko ushaka gukatira iburyo"
       },
       {
         "key": "b",
-        "text": "Ihute urenge aho abo bana bari"
+        "text": "Kata ikoni mbere y’umunyegare"
       },
       {
         "key": "c",
-        "text": ") Komeza ugume ku muvuduko munini"
+        "text": "Emerera umunyegare akomeze inzira ye"
       },
       {
         "key": "d",
-        "text": "Komeza ugendere kuruhande rw’iburyo"
+        "text": "Ongera umuvuuko kugira ngo umutange gukata mbere ye"
       }
     ],
     "correctKey": "c",
@@ -4801,19 +4789,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Amatara kamena bihu y’imbere n’ay’inyuma hamwe n’amatara magufi"
+        "text": "Ibinyabiziga byombi"
       },
       {
         "key": "b",
-        "text": "Amatara kamenabihu y’imbere n’ay’inyuma"
+        "text": "Ikinyabiziga cy’icyatsi"
       },
       {
         "key": "c",
-        "text": "Amatara magufi"
+        "text": "Ikinyabiziga cy’umutuku"
       },
       {
         "key": "d",
-        "text": "Urumuri rusanzwe"
+        "text": "Nta n’imwe"
       }
     ],
     "correctKey": "a",
@@ -4883,14 +4871,14 @@
       },
       {
         "key": "c",
-        "text": ")Hagarara niba utateza ibyago"
+        "text": "Hagarara niba utateza ibyago"
       },
       {
         "key": "d",
         "text": "Komeza ubwitonzi witegura guhagarara mugihe itara rihindutse umutuku"
       }
     ],
-    "correctKey": "a",
+    "correctKey": "c",
     "explanation": "Igisubizo ni A"
   },
   {
@@ -4948,19 +4936,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Hagarara utegereze amabwiriza"
+        "text": "Gukomeza iruhande kuko ufite uburenganzira bwo gukomeza"
       },
       {
         "key": "b",
-        "text": "Umuyobozi w’ikinyabiziga agomba kugabanya umuvuduko ateganya icyago imbere ye"
+        "text": "Gabanya umuvuduko maze ureke ikomeze"
       },
       {
         "key": "c",
-        "text": "Kukireka, ukagumana umuvuduko ufite ugakomeza"
+        "text": "Gerageza unyureho kugirango atagutinza"
       },
       {
         "key": "d",
-        "text": "Hagarara kuri icyo cyapa cya mpande eshatu mbere yo gukomeza"
+        "text": "Menyesha umuyobozi wa otobisi aguhe inzira"
       }
     ],
     "correctKey": "b",
@@ -5041,23 +5029,23 @@
   },
   {
     "number": 325,
-    "text": "Umuyobozi w’ikinyabiziga ugeze mu isangano ry’umuhanda ugenzurwa ni ibimenyetso by’amatara yaka agasanga taka (adakora), yakora iki?",
+    "text": "Umuyobozi w’ikinyabiziga ugeze mu isangano ry’umuhanda ugenzurwa ni ibimenyetso by’amatara yaka agasanga ataka (adakora), yakora iki?",
     "options": [
       {
         "key": "a",
-        "text": "Guca mu isangano n’ubwitonzi nkaho ntakimenyetso kikuyobora kirimo, witondera abandi bayobozi"
+        "text": "Guca mu isangano n’ubwitonzi nkaho ntakimenyetso kikuyobora kirimo, witondera abandi bayobozi b’ibinyabiziga"
       },
       {
         "key": "b",
-        "text": "’ibinyabiziga"
-      },
-      {
-        "key": "c",
         "text": "Gutwara neza ntagutinda mw’isangano"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "Guhagarara mw’isangano no guha inzira abayobozi b’ibinyabiziga baturuka iburyo bwawe"
+      },
+      {
+        "key": "d",
+        "text": "Gucana amatara yose ndanga cyerekezo ugakomeza"
       }
     ],
     "correctKey": "a",
@@ -5069,19 +5057,19 @@
     "options": [
       {
         "key": "a",
-        "text": "Umuyobozi w’ikinyabiziga agomba kugabanya umuvuduko no gutambukana ubwitonzi"
+        "text": "gutwara yegera umurongo wo hagati mu muhanda yerekeza ibumoso"
       },
       {
         "key": "b",
-        "text": "Ikinyabiziga cy’ubutabazi"
+        "text": "gutwara yegera uruhande rw’iburyo bw’umuhanda"
       },
       {
         "key": "c",
-        "text": "Yagize ibyago"
+        "text": "gutwara yegera ku uruhande rw’ibumoso bw’umuhanda"
       },
       {
         "key": "d",
-        "text": "Umuvudoko urenze"
+        "text": "Gutwarira hafi y’umurongo ugabanya umuhanda mo kabili"
       }
     ],
     "correctKey": "a",
@@ -5093,19 +5081,19 @@
     "options": [
       {
         "key": "a",
-        "text": "uruhande rw’ibumoso bw’umuhanda uretse igihe atawaye imashini zihinga cyangwa zikoreshwa indi mirimo"
+        "text": "Mu ruhande rw’iburyo bw’inzira nyabagendwa"
       },
       {
         "key": "b",
-        "text": "Mu gice cy;umuhanda yumva ashaka"
+        "text": "Gusa iburyo bwo hagati y’inzira nyabagendwa"
       },
       {
         "key": "c",
-        "text": "Mu gice cy’iburyo bw’umuhanda uretse igihe ashaka kunyuranaho cyangwa gukata ibumoso"
+        "text": "Muruhande urwarirwo rwo hagati mu nzira nyabagendwa"
       },
       {
         "key": "d",
-        "text": "Ku ruhande rw’ibumoso bw’umuhanda"
+        "text": "Mu ruhande rw’ibumoso bw’inzira nyabagendwa"
       }
     ],
     "correctKey": "a",
@@ -5117,19 +5105,19 @@
     "options": [
       {
         "key": "a",
-        "text": "ibinyabiziga bimuturuka inyuma umuvuduko bifite n’uburyo bimwegereye"
+        "text": "kunyuranaho ibumoso"
       },
       {
         "key": "b",
-        "text": "ibinyabiziga biturutse ibumoso bwe n’umuvuduko bifite n’intera iri hagati ye nabyo"
+        "text": "gutegereza yihanganye"
       },
       {
         "key": "c",
-        "text": "ibinyabiziga biturutse iburyo n’umuvuduko bifite ni intera iri hagati ye nabyo"
+        "text": "a na b ni ibisubizo by’ukuri"
       },
       {
         "key": "d",
-        "text": "ibinyabiziga bimututse imbere , umuvuduko bifite n’intera iri hagati ye nabyo"
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "a",
@@ -5165,19 +5153,19 @@
     "options": [
       {
         "key": "a",
-        "text": "icyemezo cy’iyandikwa ry’ikinyabiziga"
+        "text": "biremewe kubinyabiziga byabikorera kugiti cyabo"
       },
       {
         "key": "b",
-        "text": "inyemezabwishyu y’umusoro"
+        "text": "biremewe nijoro"
       },
       {
         "key": "c",
-        "text": "ubwishingizi"
+        "text": "birabujijwe ku binyabiziga byose bifite moteri"
       },
       {
         "key": "d",
-        "text": "ibisubizo byose ni ukuri"
+        "text": "ibisubizo byose nibyo"
       }
     ],
     "correctKey": "a",
@@ -5189,19 +5177,19 @@
     "options": [
       {
         "key": "a",
-        "text": "ahamanuka"
+        "text": "kwireba"
       },
       {
         "key": "b",
-        "text": "igihe umuhanda ari mugari"
+        "text": "kugenzura ibigendera mu muhanda inyuma"
       },
       {
         "key": "c",
-        "text": "igihe umuyobozi w’ikinyabiziga kiri imbere ye amweretse ikimenyetso kimwemerera kunyuranaho"
+        "text": "kureba abicaye inyuma"
       },
       {
         "key": "d",
-        "text": "nta gisubizo cy’ukuri"
+        "text": "ntagisubizo cy’ukuri"
       }
     ],
     "correctKey": "a",
@@ -5213,23 +5201,23 @@
     "options": [
       {
         "key": "a",
-        "text": "ingaruka kubindi binyabiziga"
+        "text": "biremewe"
       },
       {
         "key": "b",
-        "text": "ingaruka kubandi bakoresha umuhanda"
+        "text": "ntibyemewe"
       },
       {
         "key": "c",
-        "text": "Abandi bayobozi bi binyabiziga baza bashobora kutabona abambuka umuhanda"
+        "text": "biremewe ukoranye ubwitonzi"
       },
       {
         "key": "d",
-        "text": "Ibisubizo byose ni ukuri"
+        "text": "ibisubizo byose ni ukuri"
       }
     ],
-    "correctKey": "d",
-    "explanation": "Igisubizo ni D"
+    "correctKey": "a",
+    "explanation": "Igisubizo ni A"
   },
   {
     "number": 363,
@@ -5293,15 +5281,15 @@
       },
       {
         "key": "c",
-        "text": ") Ibinyabiziga birenze bibiri"
+        "text": "Ibinyabiziga birenze bibiri"
       },
       {
         "key": "d",
         "text": "b na c ni byo"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A",
+    "correctKey": "c",
+    "explanation": "Igisubizo ni C",
     "image": "data:image/png;base64,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"
   },
   {
@@ -5338,19 +5326,19 @@
       },
       {
         "key": "b",
-        "text": ")gutambuka mbere kw’ibinyabiziga bituruka aho ujya"
+        "text": "gutambuka mbere kw'ibinyabiziga bituruka aho ujya"
       },
       {
         "key": "c",
-        "text": "a na b ni ibisubizo by’ukuri"
+        "text": "a na b ni ibisubizo by'ukuri"
       },
       {
         "key": "d",
         "text": "nta gisubizo cyukuri kirimo"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A",
+    "correctKey": "b",
+    "explanation": "Igisubizo ni B",
     "image": "data:image/png;base64,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",
     "category": "ibyapa"
   },
@@ -5360,15 +5348,15 @@
     "options": [
       {
         "key": "a",
-        "text": "n’umuhondo"
+        "text": "iherezo ryo gutambuka mbere"
       },
       {
         "key": "b",
-        "text": "n’umutuku"
+        "text": "gutambuka mbere kw’ibinyabiziga biturutse imbere aho ujya"
       },
       {
         "key": "c",
-        "text": ") n’umweru"
+        "text": "gutambuka mbere y’ibinyabiziga biturutse imbere"
       },
       {
         "key": "d",
@@ -5385,23 +5373,23 @@
     "options": [
       {
         "key": "a",
-        "text": "ishusho mpandeshatu ,ubuso ubururu"
+        "text": "ishusho mpandeshatu, ubuso ubururu"
       },
       {
         "key": "b",
-        "text": "ishusho mpandeshatu,ubuso umukara"
+        "text": "ishusho mpandeshatu, ubuso umukara"
       },
       {
         "key": "c",
-        "text": ")ishusho mpandeshatu,ubuso umweru"
+        "text": "ishusho mpandeshatu, ubuso umweru"
       },
       {
         "key": "d",
-        "text": "nta gisubizo cy’ukuri"
+        "text": "nta gisubizo cy'ukuri"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A",
+    "correctKey": "c",
+    "explanation": "Igisubizo ni C",
     "image": "data:image/png;base64,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",
     "category": "ibyapa"
   },
@@ -5433,11 +5421,11 @@
   },
   {
     "number": 372,
-    "text": "Umuyobozi ubonye ko hari undi umukurikiye ashaka kumunyuraho agomba kubahiriza ibi bikurikira :",
+    "text": "Umuyobozi ubonye ko hari undi umukurikiye ashaka kumunyuraho agomba kubahiriza ibi bikurikira : (a.) kwegera i ruhande rw’iburyo bw’umuhanda",
     "options": [
       {
         "key": "a",
-        "text": ") kwegera i ruhande rw’iburyo bw’umuhanda"
+        "text": "kwegera i ruhande rw'iburyo bw'umuhanda"
       },
       {
         "key": "b",
@@ -5449,7 +5437,7 @@
       },
       {
         "key": "d",
-        "text": "a na c ni byo bisubizo by’ukuri"
+        "text": "a na c ni byo bisubizo by'ukuri"
       }
     ],
     "correctKey": "a",
@@ -5512,7 +5500,7 @@
     "options": [
       {
         "key": "a",
-        "text": "Ifungana ry’umuhanda"
+        "text": "Ifungana ry'umuhanda"
       },
       {
         "key": "b",
@@ -5524,20 +5512,20 @@
       },
       {
         "key": "d",
-        "text": ") nta gisubizo cy’ukuri kirimo"
+        "text": "nta gisubizo cy'ukuri kirimo"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A",
+    "correctKey": "d",
+    "explanation": "Igisubizo ni D",
     "image": "data:image/png;base64,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"
   },
   {
     "number": 376,
-    "text": "Iki cyapa kivuga:",
+    "text": "Iki cyapa kivuga: (a.) ikoni iburyo",
     "options": [
       {
         "key": "a",
-        "text": ") ikoni iburyo"
+        "text": "ikoni iburyo"
       },
       {
         "key": "b",
@@ -5611,23 +5599,23 @@
     "options": [
       {
         "key": "a",
-        "text": "Uruziga mubuso bw’ubururu, ishusho y’inka mu ibara ry’umukara"
+        "text": "Uruziga mubuso bw'ubururu, ishusho y'inka mu ibara ry'umukara"
       },
       {
         "key": "b",
-        "text": "Uruziga mu ibara ryera, ishusho y’inka mwibara ry’ubururu"
+        "text": "Uruziga mu ibara ryera, ishusho y'inka mwibara ry'ubururu"
       },
       {
         "key": "c",
-        "text": "Uruziga mu buso bw’ibara ry’ubururu, ishusho y’inka mu ibara ryera n’ikirango cy’umukara"
+        "text": "Uruziga mu buso bw'ibara ry'ubururu, ishusho y'inka mu ibara ryera n'ikirango cy'umukara"
       },
       {
         "key": "d",
-        "text": ") mpande eshatu mu buso bw’ibara ry’umweru n’ishusho y’inka mu ibara ry’umukara"
+        "text": "mpande eshatu mu buso bw'ibara ry'umweru n'ishusho y'inka mu ibara ry'umukara"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A"
+    "correctKey": "d",
+    "explanation": "Igisubizo ni D"
   },
   {
     "number": 380,
@@ -5659,7 +5647,7 @@
     "options": [
       {
         "key": "a",
-        "text": "ishusho mpandeshatu mw’ibara ritukura , ubuso bwera n’ ikiranga mu ibara ry’umukara"
+        "text": ".ishusho mpandeshatu mw’ibara ritukura , ubuso bwera n’ ikiranga mu ibara ry’umukara"
       },
       {
         "key": "b",
@@ -5707,7 +5695,7 @@
     "options": [
       {
         "key": "a",
-        "text": ") ko hari icyago"
+        "text": "ko hari icyago"
       },
       {
         "key": "b",
@@ -5715,11 +5703,11 @@
       },
       {
         "key": "c",
-        "text": "imiterere y’icyago gitunguranye"
+        "text": "imiterere y'icyago gitunguranye"
       },
       {
         "key": "d",
-        "text": "nta gisubizo cy’ukuri kirimo"
+        "text": "nta gisubizo cy'ukuri kirimo"
       }
     ],
     "correctKey": "a",
@@ -5751,7 +5739,7 @@
   },
   {
     "number": 385,
-    "text": "Ishusho y’icyapa kivuga’’ugukikira”bitegetswe ni :",
+    "text": "Ishusho y'icyapa kivuga \"ugukikira\" bitegetswe ni :",
     "options": [
       {
         "key": "a",
@@ -5759,7 +5747,7 @@
       },
       {
         "key": "b",
-        "text": ") uruziga"
+        "text": "uruziga"
       },
       {
         "key": "c",
@@ -5767,16 +5755,16 @@
       },
       {
         "key": "d",
-        "text": "nta gisubizo cy’ukuri kirimo"
+        "text": "nta gisubizo cy'ukuri kirimo"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A",
+    "correctKey": "b",
+    "explanation": "Igisubizo ni B",
     "image": "data:image/jpeg;base64,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"
   },
   {
     "number": 386,
-    "text": "Icyapa kivuga “icyerekezo gitegetswe”kigizwe n’ikirango cy’ibara :",
+    "text": "Icyapa kivuga \"icyerekezo gitegetswe\" kigizwe n'ikirango cy'ibara :",
     "options": [
       {
         "key": "a",
@@ -5788,15 +5776,15 @@
       },
       {
         "key": "c",
-        "text": ") ubururu n’ikirango cy’umweru"
+        "text": "ubururu n'ikirango cy'umweru"
       },
       {
         "key": "d",
         "text": "umukara"
       }
     ],
-    "correctKey": "a",
-    "explanation": "Igisubizo ni A"
+    "correctKey": "c",
+    "explanation": "Igisubizo ni C"
   },
   {
     "number": 387,
@@ -5849,23 +5837,23 @@
   },
   {
     "number": 390,
-    "text": "Umuhanda urombereje w’ibice byinshi. Ndashaka kunyura kuri izi kamyo ibyiri mugihe gito ibumoso icyarimwe ,",
+    "text": "Umuhanda urombereje w’ibice byinshi. Ndashaka kunyura kuri izi kamyo ibyiri mugihe gito ibumoso icyarimwe , biremewe ?",
     "options": [
       {
         "key": "a",
-        "text": "iremewe ?"
-      },
-      {
-        "key": "b",
         "text": "yego,"
       },
       {
-        "key": "c",
+        "key": "b",
         "text": "oya"
       },
       {
-        "key": "d",
+        "key": "c",
         "text": "yego bikorewe ibumoso"
+      },
+      {
+        "key": "d",
+        "text": "ntagisubizo cy’ukuri"
       }
     ],
     "correctKey": "d",
@@ -5976,10 +5964,6 @@
     "options": [
       {
         "key": "a",
-        "text": "Nshobora gukata iburyo"
-      },
-      {
-        "key": "b",
         "text": "Nshobora gukata ibumoso"
       },
       {
@@ -6125,7 +6109,7 @@
     "options": [
       {
         "key": "a",
-        "text": "Kunyuranaho kubinyabiziga bikururwa nibinyabiziga birengeje imitende ibiri ibumoso no kugendera"
+        "text": "Kunyuranaho kubinyabiziga bikururwa nibinyabiziga birengeje imitende ibiri ibumoso no kugendera kumuvuduko urengeje 70 km/h"
       },
       {
         "key": "b",
@@ -6215,7 +6199,7 @@
         "text": "Tanga inzira ku ibinyabiziga biturutse iburyo bwawe"
       }
     ],
-    "correctKey": "a",
+    "correctKey": "c",
     "explanation": "Igisubizo ni A"
   },
   {
@@ -6296,23 +6280,23 @@
   },
   {
     "number": 8,
-    "text": "Iki cyapa gisobanura iki ?",
+    "text": "Ikinyabiziga kibujijwe guhagarara akanya kanini aha hakurikira :",
     "options": [
       {
         "key": "a",
-        "text": "Ntihasohokerwa i bumoso mu nzira banyuramo bazengurutse"
+        "text": "Ahatarengeje metero 1 imbere cyangwa inyuma y’ikinyabiziga gihagaze akanya gato cyangwa kanini :"
       },
       {
         "key": "b",
-        "text": "Umuhanda udakomeza ibumoso"
+        "text": "Ahantu hari ibimenyetso bibuza byabugenewe"
       },
       {
         "key": "c",
-        "text": "Nta nkengero y’umuhanda yegutse iri ibumoso"
+        "text": "Aho abanyamaguru banyura mu muhanda ngo bakikire inkomyi"
       },
       {
         "key": "d",
-        "text": "Birabujijwe gukata ibumoso"
+        "text": "Ibisubizo byose nibyo"
       }
     ],
     "correctKey": "d",
@@ -6430,15 +6414,15 @@
       },
       {
         "key": "b",
-        "text": "Ntihanyurwa n’ibinyabiziga"
+        "text": "Ntihanyurwa n’ibinyabiziga bigenewe gutwara ibicuruzwa"
       },
       {
         "key": "c",
-        "text": "igenewe gutwara ibicuruzwa"
+        "text": "Ntihanyurwa n’ibinyabiziga bifite imitambiko itatu"
       },
       {
         "key": "d",
-        "text": "Ntihanyurwa n’ibinyabiziga bifite imitambiko itatu"
+        "text": "Hanyurwa n’ibinyabiziga bifite imitambiko itatu gusa"
       }
     ],
     "correctKey": "b",
@@ -6679,7 +6663,7 @@
   },
   {
     "number": 424,
-    "text": "Muri ibi byapa bikurikira ni ikihe cyerekana ko umuyobozi ukibonye yemerewe gutambuka mbere y'abaturutse aho gana mu nzira ifunganye:",
+    "text": "Muri ibi byapa bikurikira ni ikihe cyerekana ko umuyobozi ukibonye yemerewe gutambuka mbere y'abaturutse aho agana mu nzira ifunganye:",
     "options": [
       {
         "key": "a",
@@ -6798,7 +6782,7 @@
         "text": "Nta gisubizo kirimo"
       }
     ],
-    "correctKey": "a",
+    "correctKey": "d",
     "explanation": "Igisubizo ni A",
     "image": "data:image/png;base64,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",
     "category": "ibyapa"
@@ -6862,7 +6846,7 @@
       },
       {
         "key": "b",
-        "text": "Umuyobozi w’ikinyabiziga abujijwe kunyuranaho, uretse gusa abayobozi b’ibinyamitende nibo bashobora kurenga"
+        "text": "Umuyobozi w’ikinyabiziga abujijwe kunyuranaho, uretse gusa abayobozi b’ibinyamitende nibo bashobora kurenga umurongo wera udacagaguye"
       },
       {
         "key": "c",

@@ -72,8 +72,16 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
                     {userCorrect ? <span className="text-green-600 font-bold shrink-0">✅</span> : <span className="text-red-500 font-bold shrink-0">❌</span>}
                   </div>
                   <div className="text-sm text-gray-600 mt-2">
-                    <p>Igisubizo Watoranyije: <strong>{userAnswer?.toUpperCase() || '-'}</strong></p>
-                    {!userCorrect && <p>Igisubizo Cy'Ukuri: <strong>{correctAnswerKey.toUpperCase()}</strong></p>}
+                    <p>Igisubizo Watoranyije:{" "}
+                      {userAnswer
+                        ? <strong>{userAnswer.toUpperCase()}. {quizQ.options.find(o => o.key === userAnswer)?.text}</strong>
+                        : <strong>-</strong>}
+                    </p>
+                    {!userCorrect && (
+                      <p className="text-green-700">Igisubizo Cy'Ukuri:{" "}
+                        <strong>{correctAnswerKey.toUpperCase()}. {quizQ.options.find(o => o.key === correctAnswerKey)?.text}</strong>
+                      </p>
+                    )}
                   </div>
                   
                   {isExplaining && (
