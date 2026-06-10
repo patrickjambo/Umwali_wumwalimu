@@ -1,4 +1,4 @@
-import { pgTable, text, integer, boolean, timestamp, uuid, pgEnum, decimal, jsonb } from 'drizzle-orm/pg-core';
+import { pgTable, text, integer, boolean, timestamp, uuid, pgEnum, decimal, jsonb, primaryKey } from 'drizzle-orm/pg-core';
 
 export const questionCategoryEnum = pgEnum('question_category', [
   'text',       // Category A — no numbers
@@ -85,3 +85,24 @@ export const certificates = pgTable('certificates', {
   pdfUrl:       text('pdf_url'),
   issuedAt:     timestamp('issued_at').defaultNow(),
 });
+
+// Required by NextAuth DrizzleAdapter
+export const accounts = pgTable('accounts', {
+  userId:            uuid('userId').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+  type:              text('type').notNull(),
+  provider:          text('provider').notNull(),
+  providerAccountId: text('providerAccountId').notNull(),
+  refresh_token:     text('refresh_token'),
+  access_token:      text('access_token'),
+  expires_at:        integer('expires_at'),
+  token_type:        text('token_type'),
+  scope:             text('scope'),
+  id_token:          text('id_token'),
+  session_state:     text('session_state'),
+}, (t) => ([primaryKey({ columns: [t.provider, t.providerAccountId] })]));
+
+export const verificationTokens = pgTable('verificationToken', {
+  identifier: text('identifier').notNull(),
+  token:      text('token').notNull(),
+  expires:    timestamp('expires', { mode: 'date' }).notNull(),
+}, (t) => ([primaryKey({ columns: [t.identifier, t.token] })]));
