@@ -15,6 +15,7 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 export default function LoginPage() {
   const router = useRouter();
   const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const form = useForm<z.infer<typeof loginSchema>>({
     resolver: zodResolver(loginSchema),
@@ -23,17 +24,26 @@ export default function LoginPage() {
 
   async function onSubmit(values: z.infer<typeof loginSchema>) {
     setIsLoading(true);
-    const result = await signIn("credentials", {
-      email: values.email,
-      password: values.password,
-      redirect: false,
-    });
-    setIsLoading(false);
+    setError(null);
+    try {
+      const result = await signIn("credentials", {
+        email: values.email,
+        password: values.password,
+        redirect: false,
+      });
 
-    if (result?.error) {
-      // show error
-    } else {
-      router.push("/dashboard");
+      if (result?.error) {
+        setError("Email cyangwa ijambo banga sibyo. (Invalid email or password.)");
+      } else if (result?.ok) {
+        router.push("/dashboard");
+        router.refresh();
+      } else {
+        setError("Habaye ikibazo kitazwi. Ongera ugerageze. (Unexpected error, please try again.)");
+      }
+    } catch (err) {
+      setError("Seriveri ntiyitabye. Ongera ugerageze nyuma. (Server unreachable, please try again.)");
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -62,6 +72,11 @@ export default function LoginPage() {
                 <p className="text-sm text-red-500">{form.formState.errors.password.message}</p>
               )}
             </div>
+            {error && (
+              <p className="rounded-md bg-red-50 p-3 text-sm text-red-600" role="alert">
+                {error}
+              </p>
+            )}
             <Button type="submit" className="w-full bg-rwandan-blue hover:bg-rwandan-blue/90" disabled={isLoading}>
               {isLoading ? "Tegereza..." : "Injira"}
             </Button>
