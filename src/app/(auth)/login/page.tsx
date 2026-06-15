@@ -40,7 +40,7 @@ export default function LoginPage() {
       } else {
         setError("Habaye ikibazo kitazwi. Ongera ugerageze. (Unexpected error, please try again.)");
       }
-    } catch (err) {
+    } catch {
       setError("Seriveri ntiyitabye. Ongera ugerageze nyuma. (Server unreachable, please try again.)");
     } finally {
       setIsLoading(false);
