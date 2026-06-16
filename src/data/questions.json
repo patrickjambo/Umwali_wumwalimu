@@ -4028,11 +4028,19 @@
     "options": [
       {
         "key": "a",
-        "text": "b)"
+        "text": "mpandeshatu"
+      },
+      {
+        "key": "b",
+        "text": "uruziga"
       },
       {
         "key": "c",
-        "text": "(d)"
+        "text": "urukiramende"
+      },
+      {
+        "key": "d",
+        "text": "nta gisubizo cy’ukuri kirimo"
       }
     ],
     "correctKey": "d",

@@ -1,7 +1,8 @@
 import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
-import { Button } from "@/components/ui/button";
+import { buttonVariants } from "@/components/ui/button";
+import { cn } from "@/lib/utils";
 
 export default async function DashboardLayout({
   children,
@@ -25,11 +26,11 @@ export default async function DashboardLayout({
           <form action={async () => {
              "use server";
              const { signOut } = await import("@/lib/auth");
-             await signOut();
+             await signOut({ redirectTo: "/login" });
           }}>
-            <Button variant="outline" size="sm">
+            <button type="submit" className={cn(buttonVariants({ variant: "outline", size: "sm" }))}>
               Sohoka
-            </Button>
+            </button>
           </form>
         </div>
       </header>
