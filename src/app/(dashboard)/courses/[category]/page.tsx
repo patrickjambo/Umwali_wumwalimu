@@ -47,7 +47,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
             </CardHeader>
             <CardContent>
                  <div className="flex gap-4">
-                   <Link href={`/courses/${p.category}/${mod.id}/quiz?type=${index === 0 ? 'full' : 'quick'}`}>
+                   <Link href={`/courses/${p.category}/${mod.id}/quiz`}>
                      <Button className="bg-rwandan-blue hover:bg-rwandan-blue/90 text-white">Kora Ikizamini (Quiz)</Button>
                    </Link>
                  </div>

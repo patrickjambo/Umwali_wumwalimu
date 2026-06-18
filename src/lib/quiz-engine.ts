@@ -2,7 +2,7 @@ export interface QuizQuestion {
   id: string;
   number: number;
   text: string;
-  options: { key: string; text: string }[];
+  options: { key: string; text: string; isCorrect?: boolean }[];
   signSvg?: string;
   signImageUrl?: string;
   correctKey?: string;
@@ -29,4 +29,8 @@ export function calculateScore(
   const score = Math.round((correct / total) * 100);
   
   return { score, passed: score >= 70, correct, total };
+}
+
+export function getCorrectKey(question: QuizQuestion): string {
+  return question.correctKey || question.options.find((option) => option.isCorrect)?.key || "";
 }

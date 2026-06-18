@@ -1,25 +1,72 @@
 import { db } from '../db';
 import { questions, modules, courses } from '../db/schema';
-import data from '../data/questions.json';
+import data from '../data/questions_grouped.json';
 
-// Authoritative source: questions.json was audited against dreamz.txt
-// (verified answers). Categories are taken from the data where present,
-// otherwise derived from the question text/options.
+// Authoritative source: questions_grouped.json was parsed from dreamz.txt and
+// contains the fuller question bank. Category labels in older JSON exports can
+// be stale, so image/sign data and numeric content are checked before fallback.
 const NUMERIC_PATTERN = /\d+\s*(?:km\/h|km|m\b|cm|toni|kg|%|°)/i;
 const IBYAPA_PATTERN = /icyapa|ibyapa|kimenyetso|ishusho|ibara|uruziga|mpandeshatu/i;
 
 type Cat = 'text' | 'numeric' | 'ibyapa';
+type SourceOption = { key: string; text: string; isCorrect?: boolean };
+type SourceQuestion = {
+  number: number;
+  text: string;
+  options: SourceOption[];
+  correctKey: string;
+  category?: Cat;
+  explanation?: string;
+  image?: string;
+  signImageUrl?: string;
+  signSvg?: string;
+};
 
-function categorize(q: any): Cat {
-  if (q.category === 'text' || q.category === 'numeric' || q.category === 'ibyapa') {
-    return q.category;
-  }
-  // A question that carries an image is a road-sign (ibyapa) question.
-  if (q.image) return 'ibyapa';
-  const hay = `${q.text || ''} ${(q.options || []).map((o: any) => o.text).join(' ')}`;
+function hasSignMedia(q: SourceQuestion): boolean {
+  return Boolean(q.image || q.signImageUrl || q.signSvg);
+}
+
+function categorize(q: SourceQuestion): Cat {
+  if (hasSignMedia(q) || q.category === 'ibyapa') return 'ibyapa';
+
+  const hay = `${q.text || ''} ${(q.options || []).map((o) => o.text).join(' ')}`;
+  if (NUMERIC_PATTERN.test(hay) || q.category === 'numeric') return 'numeric';
+  if (q.category === 'text') return 'text';
   if (IBYAPA_PATTERN.test(hay)) return 'ibyapa';
-  if (NUMERIC_PATTERN.test(hay)) return 'numeric';
   return 'text';
+}
+
+function normalizeOptions(q: SourceQuestion): SourceOption[] {
+  return q.options.map((option) => ({
+    key: String(option.key).trim().toLowerCase(),
+    text: String(option.text).trim(),
+    isCorrect: option.isCorrect,
+  }));
+}
+
+function normalizeQuestion(q: SourceQuestion): SourceQuestion {
+  const options = normalizeOptions(q);
+  const correctKey = String(q.correctKey || '').trim().toLowerCase();
+
+  if (!Number.isInteger(q.number)) {
+    throw new Error(`Question has invalid number: ${JSON.stringify(q)}`);
+  }
+  if (!q.text || !String(q.text).trim()) {
+    throw new Error(`Question ${q.number} is missing text`);
+  }
+  if (options.length < 2) {
+    throw new Error(`Question ${q.number} must have at least two options`);
+  }
+  if (!options.some((option) => option.key === correctKey)) {
+    throw new Error(`Question ${q.number} correctKey "${correctKey}" is not present in its options`);
+  }
+
+  return {
+    ...q,
+    text: String(q.text).trim(),
+    options,
+    correctKey,
+  };
 }
 
 const CATEGORY_META: Record<Cat, { slug: string; title: string; description: string }> = {
@@ -34,12 +81,13 @@ async function seed() {
   await db.delete(modules);
   await db.delete(courses);
 
-  console.log(`Loaded ${data.length} audited questions.`);
+  console.log(`Loaded ${data.length} parsed questions.`);
 
   // Assign categories and guarantee globally-unique `number` values
-  // (questions.json reuses 8, 52, 96 across sections; the column is UNIQUE).
+  // (`number` is UNIQUE in the database, while dreamz.txt repeats a few labels).
   const seen = new Set<number>();
-  const prepared = (data as any[]).map((q) => {
+  const prepared = (data as SourceQuestion[]).map((rawQuestion) => {
+    const q = normalizeQuestion(rawQuestion);
     let number: number = q.number;
     while (seen.has(number)) number += 1000;
     seen.add(number);
@@ -86,11 +134,12 @@ async function seed() {
         moduleId: mod.id,
         number: q._number,
         text: q.text,
-        options: q.options,                 // raw array -> stored as jsonb
+        options: q.options,
         correctKey: q.correctKey,
         category: q._category,
         explanation: q.explanation || `Igisubizo ni ${String(q.correctKey).toUpperCase()}`,
-        signImageUrl: q.image || null,
+        signImageUrl: q.signImageUrl || q.image || null,
+        signSvg: q.signSvg || null,
       })));
       inserted += chunk.length;
     }

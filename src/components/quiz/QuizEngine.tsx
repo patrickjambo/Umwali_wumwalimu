@@ -3,7 +3,7 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
 import { Progress } from "@/components/ui/progress";
-import { QuizQuestion, calculateScore } from "@/lib/quiz-engine";
+import { QuizQuestion, calculateScore, getCorrectKey } from "@/lib/quiz-engine";
 import { useCompletion } from "@ai-sdk/react";
 
 export default function QuizEngine({ questions }: { questions: QuizQuestion[] }) {
@@ -20,15 +20,17 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
   const q = questions[currentIdx];
 
   const handleSelect = (key: string) => {
-    setAnswers({ ...answers, [q.id]: key });
-  };  const handleNext = () => {
+    setAnswers((currentAnswers) => ({ ...currentAnswers, [q.id]: key }));
+  };
+
+  const handleNext = () => {
     if (currentIdx < questions.length - 1) {
       setCurrentIdx(currentIdx + 1);
     } else {
-      // Calculate results
       const correctKeys: Record<string, string> = {};
-      // Mock correct keys for the sake of frontend UI
-      questions.forEach(q => correctKeys[q.id] = q.options[0]?.key || "a"); 
+      questions.forEach((question) => {
+        correctKeys[question.id] = getCorrectKey(question);
+      });
       const result = calculateScore(answers, questions, correctKeys);
       setScoreData(result);
       setShowResult(true);
@@ -48,7 +50,9 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
 
   if (showResult && scoreData) {
     const correctKeys: Record<string, string> = {};
-    questions.forEach(q => correctKeys[q.id] = q.correctKey || q.options[0]?.key || "a"); 
+    questions.forEach((question) => {
+      correctKeys[question.id] = getCorrectKey(question);
+    });
 
     return (
       <div className="flex flex-col items-center justify-center p-8 space-y-4">
