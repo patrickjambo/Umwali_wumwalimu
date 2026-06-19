@@ -54,7 +54,7 @@ export default function RegisterPage() {
           <Link href="/login" className="rounded-lg px-3 py-1.5 text-sm text-cyan-100/80 hover:text-white">
             Login / Register
           </Link>
-          <BackButton fallback="/" />
+          <BackButton to="/" />
         </div>
       </header>
 
