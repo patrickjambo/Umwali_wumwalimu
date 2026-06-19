@@ -1,19 +1,75 @@
 "use client";
-import { useState } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Button } from "@/components/ui/button";
 import { QuizQuestion, calculateScore, getCorrectKey } from "@/lib/quiz-engine";
 import { useCompletion } from "@ai-sdk/react";
 
-export default function QuizEngine({ questions, moduleId }: { questions: QuizQuestion[]; moduleId?: string }) {
+export default function QuizEngine({
+  questions,
+  moduleId,
+  timeLimitSec,
+}: {
+  questions: QuizQuestion[];
+  moduleId?: string;
+  timeLimitSec?: number;
+}) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
   const [scoreData, setScoreData] = useState<{ score: number; passed: boolean; correct: number; total: number } | null>(null);
   const [aiExplanationIdx, setAiExplanationIdx] = useState<number | null>(null);
+  const [remaining, setRemaining] = useState(timeLimitSec ?? 0);
 
   const { completion, complete, isLoading } = useCompletion({ api: "/api/ai/explain" });
 
   const q = questions[currentIdx];
+
+  // Refs so the countdown's auto-submit always reads the latest answers / runs once.
+  const answersRef = useRef(answers);
+  answersRef.current = answers;
+  const finishedRef = useRef(false);
+
+  const finish = () => {
+    if (finishedRef.current) return;
+    finishedRef.current = true;
+    const current = answersRef.current;
+    const correctKeys: Record<string, string> = {};
+    questions.forEach((question) => {
+      correctKeys[question.id] = getCorrectKey(question);
+    });
+    const result = calculateScore(current, questions, correctKeys);
+    setScoreData(result);
+    setShowResult(true);
+
+    // Persist the attempt so the dashboard progress reflects it (fire-and-forget).
+    if (moduleId) {
+      const answersArr = questions.map((qq) => ({
+        questionId: qq.id,
+        selectedKey: current[qq.id] ?? null,
+        correct: current[qq.id] === correctKeys[qq.id],
+      }));
+      fetch("/api/quiz", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ moduleId, score: result.score, passed: result.passed, answers: answersArr }),
+      }).catch(() => {});
+    }
+  };
+
+  // Countdown timer (only when a time limit is set).
+  useEffect(() => {
+    if (!timeLimitSec || showResult) return;
+    const t = setInterval(() => setRemaining((r) => Math.max(0, r - 1)), 1000);
+    return () => clearInterval(t);
+  }, [timeLimitSec, showResult]);
+
+  // Auto-submit when time runs out.
+  useEffect(() => {
+    if (timeLimitSec && !showResult && remaining === 0) finish();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [remaining, timeLimitSec, showResult]);
+
+  const mmss = (s: number) => `${Math.floor(s / 60)}:${String(s % 60).padStart(2, "0")}`;
 
   const handleSelect = (key: string) => {
     setAnswers((currentAnswers) => ({ ...currentAnswers, [q.id]: key }));
@@ -27,27 +83,7 @@ export default function QuizEngine({ questions, moduleId }: { questions: QuizQue
     if (currentIdx < questions.length - 1) {
       setCurrentIdx(currentIdx + 1);
     } else {
-      const correctKeys: Record<string, string> = {};
-      questions.forEach((question) => {
-        correctKeys[question.id] = getCorrectKey(question);
-      });
-      const result = calculateScore(answers, questions, correctKeys);
-      setScoreData(result);
-      setShowResult(true);
-
-      // Persist the attempt so the dashboard progress reflects it (fire-and-forget).
-      if (moduleId) {
-        const answersArr = questions.map((qq) => ({
-          questionId: qq.id,
-          selectedKey: answers[qq.id] ?? null,
-          correct: answers[qq.id] === correctKeys[qq.id],
-        }));
-        fetch("/api/quiz", {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify({ moduleId, score: result.score, passed: result.passed, answers: answersArr }),
-        }).catch(() => {});
-      }
+      finish();
     }
   };
 
@@ -175,7 +211,17 @@ export default function QuizEngine({ questions, moduleId }: { questions: QuizQue
     <div className="mx-auto max-w-2xl space-y-6 text-cyan-50">
       <div className="flex items-center justify-between text-sm font-medium text-cyan-100/65">
         <span>Ikibazo {currentIdx + 1} kuri {questions.length}</span>
-        <span>Amanota yawe y&apos;agateganyo</span>
+        {timeLimitSec ? (
+          <span
+            className={`inline-flex items-center gap-1.5 rounded-full px-3 py-1 font-semibold tabular-nums ${
+              remaining <= 60 ? "bg-red-500/20 text-red-200 animate-pulse-glow" : "bg-cyan-400/15 text-cyan-200"
+            }`}
+          >
+            ⏱ {mmss(remaining)}
+          </span>
+        ) : (
+          <span>Amanota yawe y&apos;agateganyo</span>
+        )}
       </div>
       <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
         <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 transition-all" style={{ width: `${(currentIdx / questions.length) * 100}%` }} />

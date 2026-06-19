@@ -85,6 +85,34 @@ export default async function DashboardPage() {
         </div>
       </div>
 
+      {/* Timed mock exam: 20 random questions mixed across A, B & C in 20 min */}
+      <Link href="/exam" className="hud glass is-interactive relative block overflow-hidden rounded-2xl p-6 transition-all">
+        <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex items-start gap-4">
+            <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl glass-soft text-cyan-300">
+              <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="13" r="8" />
+                <path d="M12 9v4l2.5 2.5M9 2h6M12 5V2" />
+              </svg>
+            </div>
+            <div>
+              <h3 className="text-lg font-bold text-white">Ikizamini Rusange cy&apos;Iminota 20</h3>
+              <p className="mt-1 text-sm text-cyan-100/65">
+                Ibibazo 20 bivanze muri A, B na C — bitoranywa ku buryo butunguranye buri gihe.
+              </p>
+              <div className="mt-2 flex flex-wrap gap-2 text-[11px] font-medium">
+                <span className="rounded-full bg-cyan-400/15 px-2.5 py-0.5 text-cyan-200">⏱ Iminota 20</span>
+                <span className="rounded-full bg-cyan-400/15 px-2.5 py-0.5 text-cyan-200">Ibibazo 20</span>
+                <span className="rounded-full bg-cyan-400/15 px-2.5 py-0.5 text-cyan-200">A · B · C</span>
+              </div>
+            </div>
+          </div>
+          <span className="glow-btn inline-flex h-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 px-6 font-semibold text-white">
+            Tangira Ikizamini ⏱
+          </span>
+        </div>
+      </Link>
+
       <h2 className="text-xl font-bold text-white">Ibizamini Uheruka Gukora</h2>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
