@@ -20,6 +20,19 @@ const withPWA = withPWAInit({
 const nextConfig = {
   // Don't let lint warnings fail the production build / deploy.
   eslint: { ignoreDuringBuilds: true },
+  // Remove the dev-tools indicator badge (dev-only; never shows in production).
+  devIndicators: false,
+  reactStrictMode: true,
+  poweredByHeader: false,
+  // Long-cache the background photos so repeat navigations are instant.
+  async headers() {
+    return [
+      {
+        source: "/photo/:path*",
+        headers: [{ key: "Cache-Control", value: "public, max-age=31536000, immutable" }],
+      },
+    ];
+  },
 };
 
 export default withPWA(nextConfig);
