@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { TechBackground } from "@/components/layout/TechBackground";
 
 function StepIcon({ d }: { d: React.ReactNode }) {
   return (
@@ -13,7 +14,8 @@ function StepIcon({ d }: { d: React.ReactNode }) {
 
 export default function Home() {
   return (
-    <div className="tech-bg tech-grid relative flex min-h-screen flex-col overflow-hidden">
+    <div className="relative flex min-h-screen flex-col overflow-hidden text-cyan-50">
+      <TechBackground variant="city" />
       {/* Header */}
       <header className="relative z-10 flex h-16 items-center px-5 lg:px-10">
         <Link href="/" className="flex items-center gap-2">

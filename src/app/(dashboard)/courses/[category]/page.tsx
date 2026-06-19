@@ -3,7 +3,6 @@ import { courses, modules } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { notFound } from "next/navigation";
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
@@ -31,28 +30,32 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <div className="space-y-6">
-      <div>
-        <h1 className="text-3xl font-bold capitalize">{course.title}</h1>
-        <p className="text-gray-500 mt-2">{course.description}</p>
+      <div className="hud glass relative rounded-2xl p-6">
+        <h1 className="text-glow text-2xl font-extrabold capitalize text-white md:text-3xl">{course.title}</h1>
+        <p className="mt-2 text-sm text-cyan-100/65">{course.description}</p>
       </div>
 
       <div className="grid gap-4">
         {moduleList.map((mod, index) => (
-          <Card key={mod.id} className={index === 0 ? "border-rwandan-blue" : ""}>
-            <CardHeader>
-              <CardTitle className="flex justify-between items-center">
-                <span>{mod.title}</span>
-              </CardTitle>
-              <CardDescription>{mod.content}</CardDescription>
-            </CardHeader>
-            <CardContent>
-                 <div className="flex gap-4">
-                   <Link href={`/courses/${p.category}/${mod.id}/quiz`}>
-                     <Button className="bg-rwandan-blue hover:bg-rwandan-blue/90 text-white">Kora Ikizamini (Quiz)</Button>
-                   </Link>
-                 </div>
-            </CardContent>
-          </Card>
+          <div
+            key={mod.id}
+            className="glass is-interactive flex flex-col gap-3 rounded-2xl p-5 transition-all sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div className="flex items-start gap-3">
+              <span className="grid h-9 w-9 shrink-0 place-items-center rounded-lg glass-soft text-sm font-bold text-cyan-300">
+                {index + 1}
+              </span>
+              <div>
+                <h3 className="font-semibold text-white">{mod.title}</h3>
+                <p className="mt-0.5 text-xs text-cyan-100/60">{mod.content}</p>
+              </div>
+            </div>
+            <Link href={`/courses/${p.category}/${mod.id}/quiz`} className="shrink-0">
+              <Button className="glow-btn h-10 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 px-5 font-semibold text-white hover:from-cyan-400 hover:to-sky-400">
+                Kora Ikizamini ⏵
+              </Button>
+            </Link>
+          </div>
         ))}
       </div>
     </div>

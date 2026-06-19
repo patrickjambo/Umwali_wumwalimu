@@ -11,6 +11,7 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { NextStep, fieldIcon } from "@/components/layout/AuthChrome";
+import { TechBackground } from "@/components/layout/TechBackground";
 
 function IntegrityBar({ label }: { label: string }) {
   return (
@@ -61,7 +62,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="tech-bg tech-grid tech-dots relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10">
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden px-4 py-10 text-cyan-50">
+      <TechBackground variant="network" />
       <header className="absolute left-0 top-0 z-10 flex h-16 w-full items-center gap-2 px-5 lg:px-10">
         <span className="text-lg font-bold tracking-tight text-white">Amategeko y&apos;Umuhanda</span>
         <span className="text-sm text-cyan-100/50">Advanced Platform</span>

@@ -2,6 +2,7 @@ import { auth } from "@/lib/auth";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { DashboardNav } from "@/components/layout/DashboardNav";
+import { TechBackground } from "@/components/layout/TechBackground";
 
 export default async function DashboardLayout({
   children,
@@ -18,7 +19,8 @@ export default async function DashboardLayout({
   const initial = name.charAt(0).toUpperCase();
 
   return (
-    <div className="tech-bg tech-grid relative flex min-h-screen flex-col overflow-hidden">
+    <div className="relative flex min-h-screen flex-col overflow-hidden text-cyan-50">
+      <TechBackground variant="network" />
       {/* Topbar */}
       <header className="sticky top-0 z-20 flex h-16 items-center gap-3 border-b border-cyan-400/15 bg-[#06121d]/70 px-5 backdrop-blur-md lg:px-8">
         <Link href="/dashboard" className="flex items-center gap-2">

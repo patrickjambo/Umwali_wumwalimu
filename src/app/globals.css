@@ -205,3 +205,31 @@
 }
 .animate-floaty { animation: floaty 6s ease-in-out infinite; }
 .animate-pulse-glow { animation: pulseGlow 3s ease-in-out infinite; }
+
+/* ---- animated photo background layer ---- */
+@keyframes kenburns {
+  0%   { transform: scale(1.06) translate(0, 0); }
+  50%  { transform: scale(1.14) translate(-1.5%, -1.2%); }
+  100% { transform: scale(1.06) translate(0, 0); }
+}
+@keyframes driftP {
+  0%   { transform: translate(0, 0); opacity: 0.15; }
+  25%  { opacity: 0.85; }
+  50%  { transform: translate(16px, -22px); opacity: 0.5; }
+  75%  { opacity: 0.9; }
+  100% { transform: translate(0, 0); opacity: 0.15; }
+}
+@keyframes orbA { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(46px, 34px); } }
+@keyframes orbB { 0%, 100% { transform: translate(0, 0); } 50% { transform: translate(-54px, 42px); } }
+@keyframes sweep { 0% { transform: translateX(-140%) skewX(-14deg); } 100% { transform: translateX(240%) skewX(-14deg); } }
+
+.animate-kenburns { animation: kenburns 30s ease-in-out infinite; }
+.animate-drift { animation: driftP linear infinite; }
+.animate-orb-a { animation: orbA 18s ease-in-out infinite; }
+.animate-orb-b { animation: orbB 24s ease-in-out infinite; }
+.animate-sweep { animation: sweep 11s linear infinite; }
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-kenburns, .animate-drift, .animate-orb-a, .animate-orb-b,
+  .animate-sweep, .animate-floaty, .animate-pulse-glow { animation: none !important; }
+}
