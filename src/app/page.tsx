@@ -1,76 +1,119 @@
-import Link from 'next/link'
-import { Button } from '@/components/ui/button'
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+
+function StepIcon({ d }: { d: React.ReactNode }) {
+  return (
+    <div className="relative flex h-14 w-14 items-center justify-center rounded-xl glass-soft text-cyan-300 animate-floaty">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" className="h-7 w-7">
+        {d}
+      </svg>
+    </div>
+  );
+}
 
 export default function Home() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <header className="px-4 lg:px-6 h-14 flex items-center bg-rwandan-blue text-white">
-        <Link className="flex items-center justify-center" href="#">
-          <span className="font-bold text-xl ml-2">Amategeko y'Umuhanda</span>
+    <div className="tech-bg tech-grid relative flex min-h-screen flex-col overflow-hidden">
+      {/* Header */}
+      <header className="relative z-10 flex h-16 items-center px-5 lg:px-10">
+        <Link href="/" className="flex items-center gap-2">
+          <span className="text-lg font-bold tracking-tight text-white">Amategeko y&apos;Umuhanda</span>
         </Link>
-        <nav className="ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-sm font-medium hover:underline underline-offset-4" href="/login">
-            Kwiyandikisha / Injira
+        <nav className="ml-auto flex items-center gap-2 text-sm">
+          <Link href="/login" className="rounded-lg px-3 py-1.5 text-cyan-100/80 transition-colors hover:text-white">
+            Login
+          </Link>
+          <span className="text-cyan-100/30">/</span>
+          <Link href="/register" className="rounded-lg px-3 py-1.5 text-cyan-100/80 transition-colors hover:text-white">
+            Register
           </Link>
         </nav>
       </header>
-      <main className="flex-1">
-        <section className="w-full py-12 md:py-24 lg:py-32 xl:py-48 bg-brand-50">
-          <div className="container px-4 md:px-6">
-            <div className="flex flex-col items-center space-y-4 text-center">
-              <div className="space-y-2">
-                <h1 className="text-3xl font-bold tracking-tighter sm:text-4xl md:text-5xl lg:text-6xl/none">
-                  Uburyo Bwiza bwo Kwiga Amategeko y'Umuhanda mu Rwanda
-                </h1>
-                <p className="mx-auto max-w-[700px] text-gray-500 md:text-xl dark:text-gray-400">
-                  Iga amategeko y'umuhanda, kora imyitozo, kandi unutsinde ibizamini byo kubona uruhushya rwo gutwara ibinyabiziga (Provisoire).
-                </p>
-              </div>
-              <div className="space-x-4">
-                <Link href="/register">
-                  <Button size="lg" className="bg-rwandan-blue hover:bg-rwandan-blue/90 text-white">Tangira Ubu</Button>
-                </Link>
-              </div>
+
+      <main className="relative z-10 flex-1">
+        {/* Hero */}
+        <section className="mx-auto flex max-w-5xl flex-col items-center px-4 pt-12 pb-8 text-center md:pt-20">
+          <div className="hud glass relative w-full max-w-3xl rounded-3xl px-6 py-12 md:px-14 md:py-16">
+            <p className="mb-4 inline-flex items-center gap-2 rounded-full glass-soft px-3 py-1 text-xs font-medium text-cyan-200">
+              <span className="h-1.5 w-1.5 rounded-full bg-cyan-400 animate-pulse-glow" />
+              Advanced Driving-Law Platform
+            </p>
+            <h1 className="text-glow text-3xl font-extrabold leading-tight tracking-tight text-white sm:text-4xl md:text-5xl">
+              Uburyo Bwiza bwo Kwiga Amategeko y&apos;Umuhanda mu Rwanda
+            </h1>
+            <p className="mx-auto mt-5 max-w-xl text-sm text-cyan-100/70 md:text-base">
+              Iga amategeko y&apos;umuhanda, kora imyitozo, kandi unutsinde ibizamini byo kubona
+              uruhushya rwo gutwara ibinyabiziga (Provisoire).
+            </p>
+            <div className="mt-8 flex justify-center">
+              <Link href="/register">
+                <Button className="glow-btn h-11 rounded-full bg-gradient-to-r from-cyan-500 to-sky-500 px-7 text-sm font-semibold text-white hover:from-cyan-400 hover:to-sky-400">
+                  Tangira Ubu →
+                </Button>
+              </Link>
             </div>
           </div>
         </section>
-        
-        <section className="w-full py-12 md:py-24 lg:py-32 bg-white">
-          <div className="container px-4 md:px-6">
-            <h2 className="text-3xl font-bold tracking-tighter sm:text-4xl text-center mb-12">Uko Bikora (How it works)</h2>
-            <div className="grid gap-8 sm:grid-cols-3 items-start justify-center text-center">
-              <div className="flex flex-col items-center space-y-2">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-rwandan-yellow text-2xl font-bold text-black border-4 border-rwandan-blue">1</div>
-                <h3 className="text-xl font-bold">Kwiyandikisha</h3>
-                <p className="text-sm text-gray-500">Iremere konti kugira ngo utangire gukurikirana amasomo yawe.</p>
+
+        {/* How it works */}
+        <section className="mx-auto max-w-6xl px-4 pb-20 pt-6">
+          <h2 className="mb-10 text-center text-2xl font-bold text-white">Uko Bikora (How it works)</h2>
+          <div className="grid gap-6 sm:grid-cols-3">
+            {[
+              {
+                title: "Kwiyandikisha",
+                desc: "Iremere konti kugira ngo uyavo utangire gukurikirana amasomo yawe.",
+                meta: "Registration: 98% complete",
+                icon: (
+                  <>
+                    <circle cx="8" cy="8" r="3" />
+                    <path d="M11 11l7 7m-2-5l2 2-2 2" />
+                  </>
+                ),
+              },
+              {
+                title: "Kwiga (Study)",
+                desc: "Soma ibika, reba ibyapa, reba imyitozo, kora kandi wige irana imategeko y'umuhanda zasobanuwe neza.",
+                meta: "Module Progress: 45%",
+                icon: (
+                  <>
+                    <path d="M4 5a2 2 0 012-2h6v16H6a2 2 0 00-2 2zM20 5a2 2 0 00-2-2h-6v16h6a2 2 0 012 2z" />
+                  </>
+                ),
+              },
+              {
+                title: "Kwitwara Neza (Certify)",
+                desc: "Kora ibizamini, utsinde kuko kuri kure uri busatve kurc uri busatve amorota 70% kugera ubonye icyemezo.",
+                meta: "Test Accuracy: 91%",
+                icon: (
+                  <>
+                    <circle cx="12" cy="9" r="5" />
+                    <path d="M9 13l-1 7 4-2 4 2-1-7" />
+                  </>
+                ),
+              },
+            ].map((s) => (
+              <div key={s.title} className="hud glass is-interactive relative rounded-2xl p-6 transition-all">
+                <StepIcon d={s.icon} />
+                <h3 className="mt-5 text-lg font-bold text-white">{s.title}</h3>
+                <p className="mt-2 text-sm text-cyan-100/65">{s.desc}</p>
+                <div className="mt-5 border-t border-cyan-400/15 pt-3 text-[11px] font-medium uppercase tracking-wide text-cyan-300/80">
+                  {s.meta}
+                </div>
               </div>
-              <div className="flex flex-col items-center space-y-2">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-rwandan-yellow text-2xl font-bold text-black border-4 border-rwandan-blue">2</div>
-                <h3 className="text-xl font-bold">Kwiga (Study)</h3>
-                <p className="text-sm text-gray-500">Soma ibika, reba ibyapa, kandi wige inama z'amategeko y'umuhanda zasobanuwe neza.</p>
-              </div>
-              <div className="flex flex-col items-center space-y-2">
-                <div className="flex h-16 w-16 items-center justify-center rounded-full bg-rwandan-yellow text-2xl font-bold text-black border-4 border-rwandan-blue">3</div>
-                <h3 className="text-xl font-bold">Kwitwara Neza (Certify)</h3>
-                <p className="text-sm text-gray-500">Kora ibizamini, utsinde kuko buri kiciro uri busabwe amanota 70% kugera ubonye icyemezo.</p>
-              </div>
-            </div>
+            ))}
           </div>
         </section>
       </main>
-      <footer className="flex flex-col gap-2 sm:flex-row py-6 w-full shrink-0 items-center px-4 md:px-6 border-t bg-gray-50">
-        <p className="text-xs text-gray-500 dark:text-gray-400">
-          © 2026 Amategeko y'Umuhanda. All rights reserved.
-        </p>
-        <nav className="sm:ml-auto flex gap-4 sm:gap-6">
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Ibijyanye n'iyi paji
-          </Link>
-          <Link className="text-xs hover:underline underline-offset-4" href="#">
-            Ubufasha
-          </Link>
+
+      {/* Footer */}
+      <footer className="relative z-10 flex flex-col items-center gap-2 border-t border-cyan-400/10 px-6 py-5 sm:flex-row">
+        <p className="text-xs text-cyan-100/50">© 2026 Amategeko y&apos;Umuhanda. All rights reserved.</p>
+        <nav className="sm:ml-auto flex gap-5">
+          <Link href="#" className="text-xs text-cyan-100/50 transition-colors hover:text-white">Ibijyanye n&apos;iyi paji</Link>
+          <Link href="#" className="text-xs text-cyan-100/50 transition-colors hover:text-white">Ubufasha</Link>
         </nav>
       </footer>
     </div>
-  )
+  );
 }
