@@ -45,8 +45,8 @@ export default async function QuizPage({ params }: { params: Promise<{ category:
   return (
     <div className="py-8">
       <div className="mb-8 text-center">
-        <h1 className="text-2xl font-bold">Ikizamini: {p.category.toUpperCase()}</h1>
-        <p className="text-gray-500">Ibibazo {qList.length} • Amanota fatizo 70%</p>
+        <h1 className="text-glow text-2xl font-bold text-white">Ikizamini: {p.category.toUpperCase()}</h1>
+        <p className="text-cyan-100/65">Ibibazo {qList.length} • Amanota fatizo 70%</p>
       </div>
       <QuizEngine questions={qList as any} />
     </div>

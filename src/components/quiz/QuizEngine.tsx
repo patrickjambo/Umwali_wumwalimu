@@ -1,8 +1,6 @@
 "use client";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { Progress } from "@/components/ui/progress";
 import { QuizQuestion, calculateScore, getCorrectKey } from "@/lib/quiz-engine";
 import { useCompletion } from "@ai-sdk/react";
 
@@ -10,13 +8,11 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
-  const [scoreData, setScoreData] = useState<{score: number, passed: boolean, correct: number, total: number} | null>(null);
+  const [scoreData, setScoreData] = useState<{ score: number; passed: boolean; correct: number; total: number } | null>(null);
   const [aiExplanationIdx, setAiExplanationIdx] = useState<number | null>(null);
 
-  const { completion, complete, isLoading } = useCompletion({
-    api: '/api/ai/explain'
-  });
-  
+  const { completion, complete, isLoading } = useCompletion({ api: "/api/ai/explain" });
+
   const q = questions[currentIdx];
 
   const handleSelect = (key: string) => {
@@ -38,15 +34,14 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
   };
 
   const highlightNumbers = (text: string) => {
-      // Very basic regex highlighter
-      const parts = text.split(/(\d+(?:\.\d+)?\s*(?:km\/h|km|m\b|cm|toni|kg|%|°)?)/i);
-      return parts.map((part, i) => {
-          if (/(\d+(?:\.\d+)?\s*(?:km\/h|km|m\b|cm|toni|kg|%|°)?)/i.test(part)) {
-              return <strong key={i} className="text-blue-600 font-bold">{part}</strong>;
-          }
-          return <span key={i}>{part}</span>;
-      });
-  }
+    const parts = text.split(/(\d+(?:\.\d+)?\s*(?:km\/h|km|m\b|cm|toni|kg|%|°)?)/i);
+    return parts.map((part, i) => {
+      if (/(\d+(?:\.\d+)?\s*(?:km\/h|km|m\b|cm|toni|kg|%|°)?)/i.test(part)) {
+        return <strong key={i} className="font-bold text-cyan-300">{part}</strong>;
+      }
+      return <span key={i}>{part}</span>;
+    });
+  };
 
   if (showResult && scoreData) {
     const correctKeys: Record<string, string> = {};
@@ -55,133 +50,169 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
     });
 
     return (
-      <div className="flex flex-col items-center justify-center p-8 space-y-4">
-        <h2 className="text-3xl font-bold">{scoreData.passed ? "Watsinze! 🎉" : "Ongera Ugerageze"}</h2>
-        <div className="text-6xl font-black text-brand-600">{scoreData.correct} / {scoreData.total}</div>
-        <Progress value={scoreData.score} className={`w-full max-w-md h-4 ${scoreData.passed ? 'bg-rwandan-green' : 'bg-red-500'}`} />
-        
-        <div className="w-full max-w-2xl mt-8 flex flex-col gap-4 text-left">
-          <h3 className="text-xl font-bold border-b pb-2">Ibisubizo N'Ubusobanuro (Review)</h3>
+      <div className="mx-auto flex max-w-2xl flex-col items-center space-y-4 p-4 md:p-8 text-cyan-50">
+        <h2 className="text-glow text-3xl font-extrabold text-white">{scoreData.passed ? "Watsinze! 🎉" : "Ongera Ugerageze"}</h2>
+        <div className={`text-6xl font-black ${scoreData.passed ? "text-emerald-300" : "text-red-300"}`}>
+          {scoreData.correct} / {scoreData.total}
+        </div>
+        <div className="h-3 w-full max-w-md overflow-hidden rounded-full bg-white/10">
+          <div
+            className={`h-full rounded-full ${scoreData.passed ? "bg-gradient-to-r from-emerald-400 to-teal-400" : "bg-gradient-to-r from-red-500 to-orange-400"}`}
+            style={{ width: `${scoreData.score}%` }}
+          />
+        </div>
+        <p className="text-sm text-cyan-100/70">Amanota: {scoreData.score}%</p>
+
+        <div className="mt-8 flex w-full flex-col gap-4 text-left">
+          <h3 className="border-b border-cyan-400/20 pb-2 text-xl font-bold text-white">Ibisubizo N&apos;Ubusobanuro (Review)</h3>
           {questions.map((quizQ, idx) => {
             const userAnswer = answers[quizQ.id];
             const correctAnswerKey = correctKeys[quizQ.id];
             const userCorrect = userAnswer === correctAnswerKey;
             const isExplaining = aiExplanationIdx === idx;
-            
+
             return (
-              <Card key={quizQ.id} className={userCorrect ? "border-green-200" : "border-red-200"}>
-                <CardContent className="p-4 space-y-2">
-                  <div className="flex justify-between items-start gap-4">
-                    <p className="font-semibold text-gray-800">{idx + 1}. {quizQ.category === 'numeric' ? highlightNumbers(quizQ.text) : quizQ.text}</p>
-                    {userCorrect ? <span className="text-green-600 font-bold shrink-0">✅</span> : <span className="text-red-500 font-bold shrink-0">❌</span>}
-                  </div>
-                  <div className="text-sm text-gray-600 mt-2">
-                    <p>Igisubizo Watoranyije:{" "}
-                      {userAnswer
-                        ? <strong>{userAnswer.toUpperCase()}. {quizQ.options.find(o => o.key === userAnswer)?.text}</strong>
-                        : <strong>-</strong>}
-                    </p>
-                    {!userCorrect && (
-                      <p className="text-green-700">Igisubizo Cy'Ukuri:{" "}
-                        <strong>{correctAnswerKey.toUpperCase()}. {quizQ.options.find(o => o.key === correctAnswerKey)?.text}</strong>
-                      </p>
+              <div
+                key={quizQ.id}
+                className={`glass space-y-2 rounded-2xl p-4 ${userCorrect ? "border-emerald-400/40" : "border-red-400/40"}`}
+              >
+                <div className="flex items-start justify-between gap-4">
+                  <p className="font-semibold text-white">
+                    {idx + 1}. {quizQ.category === "numeric" ? highlightNumbers(quizQ.text) : quizQ.text}
+                  </p>
+                  <span className="shrink-0 text-lg">{userCorrect ? "✅" : "❌"}</span>
+                </div>
+
+                {(quizQ.signImageUrl || quizQ.signSvg) && (
+                  <div className="flex justify-start py-1">
+                    {quizQ.signImageUrl ? (
+                      <img src={quizQ.signImageUrl} alt="Road Sign" className="max-h-28 rounded-md border border-white/10 bg-white object-contain p-1" />
+                    ) : (
+                      <div className="rounded-md bg-white p-1" dangerouslySetInnerHTML={{ __html: quizQ.signSvg! }} />
                     )}
                   </div>
-                  
-                  {isExplaining && (
-                    <div className="mt-4 p-4 bg-blue-50 text-blue-900 border border-blue-200 rounded-lg text-sm transition-all duration-300">
-                      <strong className="block mb-1">Mwarimu (AI) 🤖</strong>
-                      <p>{completion || (isLoading ? "Nteganya ubusobanuro..." : "")}</p>
-                    </div>
+                )}
+
+                <div className="mt-1 space-y-1 text-sm">
+                  <p className={userCorrect ? "text-emerald-200" : "text-cyan-100/80"}>
+                    Igisubizo Watoranyije:{" "}
+                    {userAnswer ? (
+                      <strong className="text-white">{userAnswer.toUpperCase()}. {quizQ.options.find((o) => o.key === userAnswer)?.text}</strong>
+                    ) : (
+                      <strong className="text-red-300">—</strong>
+                    )}
+                  </p>
+                  {!userCorrect && (
+                    <p className="text-emerald-300">
+                      Igisubizo Cy&apos;Ukuri:{" "}
+                      <strong>{correctAnswerKey.toUpperCase()}. {quizQ.options.find((o) => o.key === correctAnswerKey)?.text}</strong>
+                    </p>
                   )}
-                  
-                  {!isExplaining && (
-                    <Button 
-                       variant="ghost" 
-                       size="sm"
-                       onClick={() => {
-                         setAiExplanationIdx(idx);
-                         complete(JSON.stringify({ 
-                           questionText: quizQ.text, 
-                           correctAnswer: quizQ.options.find(o => o.key === correctAnswerKey)?.text,
-                           category: quizQ.category 
-                         }));
-                       }}
-                       className="mt-2 text-xs text-blue-600 hover:text-blue-800"
-                    >
-                       💡 Soba ubusobanuro ku AI
-                    </Button>
-                  )}
-                </CardContent>
-              </Card>
-            )
+                </div>
+
+                {isExplaining && (
+                  <div className="mt-3 rounded-lg border border-cyan-400/25 bg-cyan-500/10 p-3 text-sm text-cyan-50">
+                    <strong className="mb-1 block text-cyan-200">Mwarimu (AI) 🤖</strong>
+                    <p>{completion || (isLoading ? "Nteganya ubusobanuro..." : "")}</p>
+                  </div>
+                )}
+
+                {!isExplaining && (
+                  <Button
+                    variant="ghost"
+                    size="sm"
+                    onClick={() => {
+                      setAiExplanationIdx(idx);
+                      complete(
+                        JSON.stringify({
+                          questionText: quizQ.text,
+                          correctAnswer: quizQ.options.find((o) => o.key === correctAnswerKey)?.text,
+                          category: quizQ.category,
+                        })
+                      );
+                    }}
+                    className="mt-1 text-xs text-cyan-300 hover:bg-white/5 hover:text-cyan-100"
+                  >
+                    💡 Soba ubusobanuro ku AI
+                  </Button>
+                )}
+              </div>
+            );
           })}
         </div>
 
-        <Button onClick={() => window.location.reload()} className="mt-8 px-8 border bg-transparent hover:bg-gray-100 text-rwandan-blue">
+        <Button
+          onClick={() => window.location.reload()}
+          className="glow-btn mt-8 h-11 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 px-8 font-semibold text-white hover:from-cyan-400 hover:to-sky-400"
+        >
           Komeza Uwige
         </Button>
       </div>
     );
   }
 
-  if (!q) return <div>Nta bibazo bihari.</div>;
+  if (!q) return <div className="text-cyan-100/80">Nta bibazo bihari.</div>;
 
   return (
-    <div className="max-w-2xl mx-auto space-y-6">
-      <div className="flex justify-between items-center text-sm font-medium text-gray-500">
+    <div className="mx-auto max-w-2xl space-y-6 text-cyan-50">
+      <div className="flex items-center justify-between text-sm font-medium text-cyan-100/65">
         <span>Ikibazo {currentIdx + 1} kuri {questions.length}</span>
-        <span>Amanota yawe y'agateganyo</span>
+        <span>Amanota yawe y&apos;agateganyo</span>
       </div>
-      <Progress value={(currentIdx / questions.length) * 100} className="h-2" />
+      <div className="h-2 w-full overflow-hidden rounded-full bg-white/10">
+        <div className="h-full rounded-full bg-gradient-to-r from-cyan-400 to-sky-500 transition-all" style={{ width: `${(currentIdx / questions.length) * 100}%` }} />
+      </div>
 
-      <Card className="shadow-lg border-2">
-        <CardContent className="p-6 md:p-8 space-y-6">
-          {(q.signImageUrl || q.signSvg) && (
-            <div className="w-full flex justify-center mb-6">
-              {q.signImageUrl ? (
-                 <img src={q.signImageUrl} alt="Road Sign" className="max-h-64 object-contain rounded-md shadow-sm border border-gray-100" />
-              ) : (
-                 <div dangerouslySetInnerHTML={{ __html: q.signSvg! }} />
-              )}
-            </div>
-          )}
+      <div className="hud glass rounded-2xl p-6 md:p-8">
+        {(q.signImageUrl || q.signSvg) && (
+          <div className="mb-6 flex w-full justify-center">
+            {q.signImageUrl ? (
+              <img src={q.signImageUrl} alt="Road Sign" className="max-h-64 rounded-lg border border-white/10 bg-white object-contain p-2" />
+            ) : (
+              <div className="rounded-lg bg-white p-2" dangerouslySetInnerHTML={{ __html: q.signSvg! }} />
+            )}
+          </div>
+        )}
 
-          <h2 className="text-xl md:text-2xl font-semibold leading-relaxed">
-            {q.category === 'numeric' ? highlightNumbers(q.text) : q.text}
-          </h2>
+        <h2 className="text-xl font-semibold leading-relaxed text-white md:text-2xl">
+          {q.category === "numeric" ? highlightNumbers(q.text) : q.text}
+        </h2>
 
-          <div className="space-y-3 mt-8">
-            {q.options.map((opt) => (
+        <div className="mt-8 space-y-3">
+          {q.options.map((opt) => {
+            const selected = answers[q.id] === opt.key;
+            return (
               <button
                 key={opt.key}
                 onClick={() => handleSelect(opt.key)}
-                className={`w-full text-left p-4 rounded-xl border-2 transition-all duration-200 ${
-                  answers[q.id] === opt.key 
-                    ? 'border-rwandan-blue bg-blue-50 shadow-md ring-2 ring-blue-200' 
-                    : 'border-gray-200 hover:border-gray-300 hover:bg-gray-50'
+                className={`w-full rounded-xl border p-4 text-left transition-all duration-200 ${
+                  selected
+                    ? "border-cyan-400/70 bg-cyan-500/15 ring-2 ring-cyan-400/40"
+                    : "border-cyan-400/15 bg-white/5 hover:border-cyan-400/40 hover:bg-white/10"
                 }`}
               >
                 <div className="flex items-center gap-4">
-                  <div className={`flex-shrink-0 w-8 h-8 rounded-full border-2 flex items-center justify-center font-bold ${
-                    answers[q.id] === opt.key ? 'border-rwandan-blue bg-rwandan-blue text-white' : 'border-gray-300 text-gray-500'
-                  }`}>
+                  <div
+                    className={`flex h-8 w-8 shrink-0 items-center justify-center rounded-full border font-bold ${
+                      selected ? "border-cyan-300 bg-cyan-500 text-white" : "border-cyan-400/30 text-cyan-200"
+                    }`}
+                  >
                     {opt.key.toUpperCase()}
                   </div>
-                  <span className="text-base md:text-lg">{opt.text}</span>
+                  <span className="text-base text-cyan-50 md:text-lg">{opt.text}</span>
                 </div>
               </button>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            );
+          })}
+        </div>
+      </div>
 
       <div className="flex justify-end">
-        <Button 
-          size="lg" 
-          onClick={handleNext} 
+        <Button
+          size="lg"
+          onClick={handleNext}
           disabled={!answers[q.id]}
-          className="bg-rwandan-blue hover:bg-rwandan-blue/90 text-white min-w-[200px]"
+          className="glow-btn h-11 min-w-[200px] rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 font-semibold text-white hover:from-cyan-400 hover:to-sky-400 disabled:opacity-50"
         >
           {currentIdx === questions.length - 1 ? "Ohereza" : "Komeza"}
         </Button>
