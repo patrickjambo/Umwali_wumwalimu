@@ -8,10 +8,12 @@ export default function QuizEngine({
   questions,
   moduleId,
   timeLimitSec,
+  examMode,
 }: {
   questions: QuizQuestion[];
   moduleId?: string;
   timeLimitSec?: number;
+  examMode?: boolean;
 }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
@@ -41,8 +43,8 @@ export default function QuizEngine({
     setScoreData(result);
     setShowResult(true);
 
-    // Persist the attempt so the dashboard progress reflects it (fire-and-forget).
-    if (moduleId) {
+    // Persist the attempt so the dashboard reflects it (fire-and-forget).
+    if (moduleId || examMode) {
       const answersArr = questions.map((qq) => ({
         questionId: qq.id,
         selectedKey: current[qq.id] ?? null,
@@ -51,7 +53,13 @@ export default function QuizEngine({
       fetch("/api/quiz", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ moduleId, score: result.score, passed: result.passed, answers: answersArr }),
+        body: JSON.stringify({
+          moduleId: examMode ? undefined : moduleId,
+          kind: examMode ? "exam" : "module",
+          score: result.score,
+          passed: result.passed,
+          answers: answersArr,
+        }),
       }).catch(() => {});
     }
   };

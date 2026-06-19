@@ -16,23 +16,25 @@ export async function POST(req: Request) {
   const userId = (session?.user as { id?: string } | undefined)?.id;
   if (!userId) return NextResponse.json({ error: "unauthorized" }, { status: 401 });
 
-  let body: { moduleId?: string; score?: number; passed?: boolean; answers?: unknown };
+  let body: { moduleId?: string; kind?: string; score?: number; passed?: boolean; answers?: unknown };
   try {
     body = await req.json();
   } catch {
     return NextResponse.json({ error: "invalid body" }, { status: 400 });
   }
 
-  const { moduleId, score, passed, answers } = body;
-  if (!moduleId || !UUID.test(moduleId)) {
-    // Dummy/preview modules have non-UUID ids; nothing to persist.
+  const { moduleId, kind, score, passed, answers } = body;
+  const isExam = kind === "exam";
+  // Module quizzes need a real module id; exams have none. Skip dummy/preview ids.
+  if (!isExam && (!moduleId || !UUID.test(moduleId))) {
     return NextResponse.json({ ok: false, skipped: true });
   }
 
   try {
     await db.insert(quizAttempts).values({
       userId,
-      moduleId,
+      moduleId: isExam ? null : moduleId,
+      kind: isExam ? "exam" : "module",
       score: String(Math.min(100, Math.max(0, Math.round(Number(score) || 0)))),
       passed: Boolean(passed),
       answers: Array.isArray(answers) ? answers : [],

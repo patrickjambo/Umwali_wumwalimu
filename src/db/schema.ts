@@ -69,7 +69,8 @@ export const enrollments = pgTable('enrollments', {
 export const quizAttempts = pgTable('quiz_attempts', {
   id:          uuid('id').defaultRandom().primaryKey(),
   userId:      uuid('user_id').references(() => users.id).notNull(),
-  moduleId:    uuid('module_id').references(() => modules.id).notNull(),
+  moduleId:    uuid('module_id').references(() => modules.id), // null for mixed mock exams
+  kind:        text('kind').default('module'), // 'module' | 'exam'
   score:       decimal('score', { precision: 5, scale: 2 }).notNull(),
   passed:      boolean('passed').notNull(),
   answers:     jsonb('answers').notNull(), // [{questionId, selectedKey, correct}]

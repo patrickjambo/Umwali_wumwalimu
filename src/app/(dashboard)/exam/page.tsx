@@ -36,7 +36,7 @@ export default async function ExamPage() {
           Ibibazo {qList.length} bivanze muri A, B na C • Iminota 20 • bitoranywa ku buryo butunguranye
         </p>
       </div>
-      <QuizEngine questions={qList as unknown as Parameters<typeof QuizEngine>[0]["questions"]} timeLimitSec={20 * 60} />
+      <QuizEngine questions={qList as unknown as Parameters<typeof QuizEngine>[0]["questions"]} timeLimitSec={20 * 60} examMode />
     </div>
   );
 }

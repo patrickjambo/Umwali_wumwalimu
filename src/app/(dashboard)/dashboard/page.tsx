@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { ProgressRing } from "@/components/layout/AuthChrome";
 import { db } from "@/db";
 import { courses, modules, quizAttempts } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, desc } from "drizzle-orm";
 
 const categories = [
   {
@@ -67,6 +67,26 @@ export default async function DashboardPage() {
     return Math.round((done / mods.length) * 100);
   };
 
+  // Recent attempts (module quizzes + mixed mock exams) for the activity feed.
+  const recent = userId
+    ? await db
+        .select({
+          id: quizAttempts.id,
+          score: quizAttempts.score,
+          passed: quizAttempts.passed,
+          kind: quizAttempts.kind,
+          attemptedAt: quizAttempts.attemptedAt,
+          moduleTitle: modules.title,
+          courseTitle: courses.title,
+        })
+        .from(quizAttempts)
+        .leftJoin(modules, eq(quizAttempts.moduleId, modules.id))
+        .leftJoin(courses, eq(modules.courseId, courses.id))
+        .where(eq(quizAttempts.userId, userId))
+        .orderBy(desc(quizAttempts.attemptedAt))
+        .limit(6)
+    : [];
+
   return (
     <div className="space-y-7">
       {/* Greeting + security status */}
@@ -113,7 +133,7 @@ export default async function DashboardPage() {
         </div>
       </Link>
 
-      <h2 className="text-xl font-bold text-white">Ibizamini Uheruka Gukora</h2>
+      <h2 className="text-xl font-bold text-white">Ibyiciro by&apos;Amasomo</h2>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
         {categories.map((c) => {
@@ -146,6 +166,41 @@ export default async function DashboardPage() {
           );
         })}
       </div>
+
+      {/* Recent attempts (module quizzes + mixed mock exams) */}
+      <h2 className="text-xl font-bold text-white">Ibizamini Uheruka Gukora</h2>
+      {recent.length === 0 ? (
+        <div className="glass rounded-2xl p-8 text-center text-sm text-cyan-100/60">
+          Nta bizamini urakora. Tangira amasomo cyangwa Ikizamini Rusange kugira ngo bigaragare hano.
+        </div>
+      ) : (
+        <div className="flex flex-col gap-3">
+          {recent.map((r) => {
+            const pct = Math.round(Number(r.score) || 0);
+            const label =
+              r.kind === "exam" || !r.moduleTitle
+                ? "Ikizamini Rusange (A · B · C)"
+                : `${r.courseTitle ?? "Amasomo"} — ${r.moduleTitle}`;
+            const when = r.attemptedAt ? new Date(r.attemptedAt).toLocaleDateString("en-GB") : "";
+            return (
+              <div key={r.id} className="glass flex items-center justify-between gap-4 rounded-2xl p-4">
+                <div className="flex items-center gap-3">
+                  <span className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl text-sm font-bold ${r.passed ? "bg-emerald-400/15 text-emerald-300" : "bg-red-400/15 text-red-300"}`}>
+                    {pct}%
+                  </span>
+                  <div>
+                    <p className="text-sm font-semibold text-white">{label}</p>
+                    <p className="text-xs text-cyan-100/55">{when}</p>
+                  </div>
+                </div>
+                <span className={`rounded-full px-3 py-1 text-xs font-semibold ${r.passed ? "bg-emerald-400/15 text-emerald-300" : "bg-red-400/15 text-red-300"}`}>
+                  {r.passed ? "Watsinze ✓" : "Ntiwatsinze"}
+                </span>
+              </div>
+            );
+          })}
+        </div>
+      )}
     </div>
   );
 }
