@@ -2,6 +2,7 @@ import { db } from "@/db";
 import { questions } from "@/db/schema";
 import { and, asc, eq } from "drizzle-orm";
 import QuizEngine from "@/components/quiz/QuizEngine";
+import { BackButton } from "@/components/layout/BackButton";
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
@@ -44,11 +45,14 @@ export default async function QuizPage({ params }: { params: Promise<{ category:
 
   return (
     <div className="py-8">
+      <div className="mb-4">
+        <BackButton label="Subira ku Amasomo" fallback={`/courses/${p.category}`} />
+      </div>
       <div className="mb-8 text-center">
         <h1 className="text-glow text-2xl font-bold text-white">Ikizamini: {p.category.toUpperCase()}</h1>
         <p className="text-cyan-100/65">Ibibazo {qList.length} • Amanota fatizo 70%</p>
       </div>
-      <QuizEngine questions={qList as any} />
+      <QuizEngine questions={qList as any} moduleId={UUID_PATTERN.test(p.module) ? p.module : undefined} />
     </div>
   );
 }

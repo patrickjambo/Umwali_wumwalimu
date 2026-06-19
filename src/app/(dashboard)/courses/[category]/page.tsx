@@ -3,6 +3,7 @@ import { courses, modules } from "@/db/schema";
 import { eq, asc } from "drizzle-orm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
+import { BackButton } from "@/components/layout/BackButton";
 import { notFound } from "next/navigation";
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
@@ -30,6 +31,7 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
 
   return (
     <div className="space-y-6">
+      <BackButton label="Subira ku Ahabanza" fallback="/dashboard" />
       <div className="hud glass relative rounded-2xl p-6">
         <h1 className="text-glow text-2xl font-extrabold capitalize text-white md:text-3xl">{course.title}</h1>
         <p className="mt-2 text-sm text-cyan-100/65">{course.description}</p>

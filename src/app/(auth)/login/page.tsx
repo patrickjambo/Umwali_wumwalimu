@@ -12,6 +12,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { NextStep, fieldIcon } from "@/components/layout/AuthChrome";
 import { TechBackground } from "@/components/layout/TechBackground";
+import { BackButton } from "@/components/layout/BackButton";
 
 function IntegrityBar({ label }: { label: string }) {
   return (
@@ -67,6 +68,7 @@ export default function LoginPage() {
       <header className="absolute left-0 top-0 z-10 flex h-16 w-full items-center gap-2 px-5 lg:px-10">
         <span className="text-lg font-bold tracking-tight text-white">Amategeko y&apos;Umuhanda</span>
         <span className="text-sm text-cyan-100/50">Advanced Platform</span>
+        <BackButton fallback="/" className="ml-auto" />
       </header>
 
       <div className="relative z-10 grid w-full max-w-5xl items-center gap-5 md:grid-cols-[220px_1fr_220px]">

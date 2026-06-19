@@ -4,7 +4,7 @@ import { Button } from "@/components/ui/button";
 import { QuizQuestion, calculateScore, getCorrectKey } from "@/lib/quiz-engine";
 import { useCompletion } from "@ai-sdk/react";
 
-export default function QuizEngine({ questions }: { questions: QuizQuestion[] }) {
+export default function QuizEngine({ questions, moduleId }: { questions: QuizQuestion[]; moduleId?: string }) {
   const [currentIdx, setCurrentIdx] = useState(0);
   const [answers, setAnswers] = useState<Record<string, string>>({});
   const [showResult, setShowResult] = useState(false);
@@ -19,6 +19,10 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
     setAnswers((currentAnswers) => ({ ...currentAnswers, [q.id]: key }));
   };
 
+  const handlePrev = () => {
+    setCurrentIdx((i) => Math.max(0, i - 1));
+  };
+
   const handleNext = () => {
     if (currentIdx < questions.length - 1) {
       setCurrentIdx(currentIdx + 1);
@@ -30,6 +34,20 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
       const result = calculateScore(answers, questions, correctKeys);
       setScoreData(result);
       setShowResult(true);
+
+      // Persist the attempt so the dashboard progress reflects it (fire-and-forget).
+      if (moduleId) {
+        const answersArr = questions.map((qq) => ({
+          questionId: qq.id,
+          selectedKey: answers[qq.id] ?? null,
+          correct: answers[qq.id] === correctKeys[qq.id],
+        }));
+        fetch("/api/quiz", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ moduleId, score: result.score, passed: result.passed, answers: answersArr }),
+        }).catch(() => {});
+      }
     }
   };
 
@@ -207,14 +225,23 @@ export default function QuizEngine({ questions }: { questions: QuizQuestion[] })
         </div>
       </div>
 
-      <div className="flex justify-end">
+      <div className="flex items-center justify-between gap-3">
+        <Button
+          size="lg"
+          variant="ghost"
+          onClick={handlePrev}
+          disabled={currentIdx === 0}
+          className="h-11 rounded-xl border border-cyan-400/25 bg-white/5 px-5 text-cyan-100/85 hover:bg-white/10 hover:text-white disabled:opacity-40"
+        >
+          ← Subira inyuma
+        </Button>
         <Button
           size="lg"
           onClick={handleNext}
           disabled={!answers[q.id]}
-          className="glow-btn h-11 min-w-[200px] rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 font-semibold text-white hover:from-cyan-400 hover:to-sky-400 disabled:opacity-50"
+          className="glow-btn h-11 min-w-[180px] rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 font-semibold text-white hover:from-cyan-400 hover:to-sky-400 disabled:opacity-50"
         >
-          {currentIdx === questions.length - 1 ? "Ohereza" : "Komeza"}
+          {currentIdx === questions.length - 1 ? "Ohereza" : "Komeza →"}
         </Button>
       </div>
     </div>

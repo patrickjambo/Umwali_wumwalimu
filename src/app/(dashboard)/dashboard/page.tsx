@@ -2,11 +2,15 @@ import { auth } from "@/lib/auth";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProgressRing } from "@/components/layout/AuthChrome";
+import { db } from "@/db";
+import { courses, modules, quizAttempts } from "@/db/schema";
+import { eq } from "drizzle-orm";
 
 const categories = [
   {
+    cat: "text" as const,
     tag: "Category A: Amategeko Rusange",
-    desc: "Ibibazo by'amateambo gusa",
+    desc: "Ibibazo by'amategeko gusa",
     href: "/courses/text",
     icon: (
       <>
@@ -16,8 +20,9 @@ const categories = [
     ),
   },
   {
+    cat: "numeric" as const,
     tag: "Category B: Ingero n'Ibipimo",
-    desc: "Ibibazo birimo r'Imibare",
+    desc: "Ibibazo birimo imibare",
     href: "/courses/numeric",
     icon: (
       <>
@@ -26,6 +31,7 @@ const categories = [
     ),
   },
   {
+    cat: "ibyapa" as const,
     tag: "Category C: Ibyapa",
     desc: "Ibimenyetso (Road Signs)",
     href: "/courses/ibyapa",
@@ -41,6 +47,25 @@ const categories = [
 export default async function DashboardPage() {
   const session = await auth();
   const first = session?.user?.name?.split(" ")[0] || "Mukunzi";
+  const userId = (session?.user as { id?: string } | undefined)?.id;
+
+  // Progress per category = completed modules (Ibizamini done) / total modules.
+  const [allCourses, allModules, userAttempts] = await Promise.all([
+    db.select({ id: courses.id, category: courses.category }).from(courses),
+    db.select({ id: modules.id, courseId: modules.courseId }).from(modules),
+    userId
+      ? db.select({ moduleId: quizAttempts.moduleId }).from(quizAttempts).where(eq(quizAttempts.userId, userId))
+      : Promise.resolve([] as { moduleId: string }[]),
+  ]);
+  const doneModules = new Set(userAttempts.map((a) => a.moduleId));
+  const pctFor = (cat: string) => {
+    const course = allCourses.find((c) => c.category === cat);
+    if (!course) return 0;
+    const mods = allModules.filter((m) => m.courseId === course.id);
+    if (mods.length === 0) return 0;
+    const done = mods.filter((m) => doneModules.has(m.id)).length;
+    return Math.round((done / mods.length) * 100);
+  };
 
   return (
     <div className="space-y-7">
@@ -63,7 +88,9 @@ export default async function DashboardPage() {
       <h2 className="text-xl font-bold text-white">Ibizamini Uheruka Gukora</h2>
 
       <div className="grid gap-5 md:grid-cols-2 lg:grid-cols-3">
-        {categories.map((c) => (
+        {categories.map((c) => {
+          const pct = pctFor(c.cat);
+          return (
           <div key={c.href} className="hud glass is-interactive relative flex flex-col rounded-2xl p-6 transition-all">
             <div className="mb-4 flex items-start justify-between">
               <div>
@@ -76,8 +103,10 @@ export default async function DashboardPage() {
             </div>
 
             <div className="mb-5 flex items-center gap-4">
-              <ProgressRing value={0} size={72} />
-              <span className="rounded-full bg-emerald-400/15 px-3 py-1 text-xs font-semibold text-emerald-300">Active</span>
+              <ProgressRing value={pct} size={72} />
+              <span className={`rounded-full px-3 py-1 text-xs font-semibold ${pct >= 100 ? "bg-emerald-400/20 text-emerald-200" : "bg-cyan-400/15 text-cyan-200"}`}>
+                {pct >= 100 ? "Byarangiye ✓" : pct > 0 ? "Birakomeza" : "Active"}
+              </span>
             </div>
 
             <Link href={c.href} className="mt-auto block">
@@ -86,7 +115,8 @@ export default async function DashboardPage() {
               </Button>
             </Link>
           </div>
-        ))}
+          );
+        })}
       </div>
     </div>
   );

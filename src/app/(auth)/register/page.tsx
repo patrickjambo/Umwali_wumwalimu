@@ -11,6 +11,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ProgressRing, SecurityStatus, NextStep, fieldIcon } from "@/components/layout/AuthChrome";
 import { TechBackground } from "@/components/layout/TechBackground";
+import { BackButton } from "@/components/layout/BackButton";
 
 export default function RegisterPage() {
   const router = useRouter();
@@ -49,9 +50,12 @@ export default function RegisterPage() {
       <TechBackground variant="network" />
       <header className="absolute left-0 top-0 z-10 flex h-16 w-full items-center px-5 lg:px-10">
         <span className="text-lg font-bold tracking-tight text-white">Amategeko y&apos;Umuhanda</span>
-        <Link href="/login" className="ml-auto rounded-lg px-3 py-1.5 text-sm text-cyan-100/80 hover:text-white">
-          Login / Register
-        </Link>
+        <div className="ml-auto flex items-center gap-2">
+          <Link href="/login" className="rounded-lg px-3 py-1.5 text-sm text-cyan-100/80 hover:text-white">
+            Login / Register
+          </Link>
+          <BackButton fallback="/" />
+        </div>
       </header>
 
       <div className="hud glass relative z-10 w-full max-w-4xl rounded-3xl p-6 md:p-8">
