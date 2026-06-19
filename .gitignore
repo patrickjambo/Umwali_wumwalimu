@@ -47,3 +47,8 @@ seed.sql
 seed_gen.log
 *.bak
 *.bak[0-9]
+
+# pdf image-extraction scratch + source pdf + backups
+pdf_extract/
+dreamz.pdf
+*.preimg

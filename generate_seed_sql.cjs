@@ -42,20 +42,15 @@ const CATEGORY_META = {
 };
 
 // --- data quarantine (mirror seed-questions.ts) ----------------------------
-// The PDF parse left some questions corrupted (merged/blank options, sign
-// questions whose image was lost). We never ship those, and we strip images
-// that were wrongly glued onto plain text questions. Raw JSON is left intact.
-const SIGN_Q = (t = '') =>
-  /\b(iki|iyi|ibi|iyo|iyihe|aya|icyapa)\b[^.]{0,40}\b(cyapa|byapa|kimenyetso|bimenyetso|shusho|ishusho)\b/i.test(t) ||
-  /\b(cyapa|byapa|kimenyetso)\b[^.]{0,35}\b(gisobanura|cyivuga|kivuga|kivuze|kigaragaza|gikurikira|bikurikira|bikurira|gikoresha|kibuza|cyerekana)\b/i.test(t) ||
-  /\bbyapa\b[^.]{0,25}\b(bikurikira|bikurira)\b/i.test(t);
+// Sign images were re-extracted from dreamz.pdf and re-mapped per question, so
+// the embedded `image` data is authoritative and is never stripped. We only
+// drop questions whose OPTIONS are unusable (image-only option questions that
+// can't render as text, or parser corruption). Raw JSON is left intact.
 const optCorrupt = (o) => { const t = (o.text || '').trim(); return t.length === 0 || /^[a-d][).\s]*$/i.test(t); };
-const needsImage = (q) => SIGN_Q(q.text) || q.category === 'ibyapa';
 
 function quarantineReason(q) {
   if (!Array.isArray(q.options) || q.options.length !== 4) return `options=${q.options ? q.options.length : 0}`;
   if (q.options.some(optCorrupt)) return 'corrupt-option';
-  if (SIGN_Q(q.text) && !hasSignMedia(q)) return 'sign-question-without-image';
   return null;
 }
 
@@ -65,19 +60,12 @@ const J = (v) => `'${JSON.stringify(v).replace(/'/g, "''")}'::jsonb`;
 
 // --- mirror seed() ---------------------------------------------------------
 const dropped = [];
-let strippedImages = 0;
 const seen = new Set();
 const prepared = [];
 for (const raw of data) {
   const reason = quarantineReason(raw);
   if (reason) { dropped.push({ number: raw.number, reason }); continue; }
-  // Drop an image that was mis-attached to a plain text question.
-  let src = raw;
-  if (hasSignMedia(raw) && !needsImage(raw)) {
-    src = { ...raw, image: undefined, signImageUrl: undefined, signSvg: undefined };
-    strippedImages++;
-  }
-  const q = normalizeQuestion(src);
+  const q = normalizeQuestion(raw);
   let number = q.number;
   while (seen.has(number)) number += 1000;
   seen.add(number);
@@ -128,7 +116,7 @@ for (const cat of ['text', 'numeric', 'ibyapa']) {
 lines.push('COMMIT;');
 
 process.stderr.write(`Category distribution: ${JSON.stringify(counts)}\n`);
-process.stderr.write(`Stripped mis-attached images from ${strippedImages} text questions.\n`);
+process.stderr.write(`Questions with sign image: ${prepared.filter((q) => q.image || q.signImageUrl || q.signSvg).length}\n`);
 process.stderr.write(`Quarantined ${dropped.length} broken questions: ${dropped.map((d) => `#${d.number}(${d.reason})`).join(', ')}\n`);
 process.stderr.write(`Prepared ${prepared.length} questions, will insert ${inserted}.\n`);
 process.stdout.write(lines.join('\n') + '\n');

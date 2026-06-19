@@ -44,25 +44,18 @@ function normalizeOptions(q: SourceQuestion): SourceOption[] {
   }));
 }
 
-// The PDF parse left some questions corrupted (merged/blank options, sign
-// questions whose image was lost). We never seed those, and we strip images
-// that were wrongly glued onto plain text questions. Raw JSON stays intact.
-const SIGN_Q = (t = ''): boolean =>
-  /\b(iki|iyi|ibi|iyo|iyihe|aya|icyapa)\b[^.]{0,40}\b(cyapa|byapa|kimenyetso|bimenyetso|shusho|ishusho)\b/i.test(t) ||
-  /\b(cyapa|byapa|kimenyetso)\b[^.]{0,35}\b(gisobanura|cyivuga|kivuga|kivuze|kigaragaza|gikurikira|bikurikira|bikurira|gikoresha|kibuza|cyerekana)\b/i.test(t) ||
-  /\bbyapa\b[^.]{0,25}\b(bikurikira|bikurira)\b/i.test(t);
-
+// Sign images were re-extracted from dreamz.pdf and re-mapped per question, so
+// the embedded `image` data is authoritative and is never stripped. We only
+// drop questions whose OPTIONS are unusable (image-only option questions that
+// can't render as text, or parser corruption). Raw JSON stays intact.
 const optCorrupt = (o: SourceOption): boolean => {
   const t = (o.text || '').trim();
   return t.length === 0 || /^[a-d][).\s]*$/i.test(t);
 };
 
-const needsImage = (q: SourceQuestion): boolean => SIGN_Q(q.text) || q.category === 'ibyapa';
-
 function quarantineReason(q: SourceQuestion): string | null {
   if (!Array.isArray(q.options) || q.options.length !== 4) return `options=${q.options ? q.options.length : 0}`;
   if (q.options.some(optCorrupt)) return 'corrupt-option';
-  if (SIGN_Q(q.text) && !hasSignMedia(q)) return 'sign-question-without-image';
   return null;
 }
 
@@ -105,30 +98,22 @@ async function seed() {
 
   console.log(`Loaded ${data.length} parsed questions.`);
 
-  // Quarantine broken questions, strip mis-attached images, assign categories,
-  // and guarantee globally-unique `number` values (`number` is UNIQUE in the
-  // database, while dreamz.txt repeats a few labels).
+  // Quarantine unusable questions, assign categories, and guarantee globally-
+  // unique `number` values (`number` is UNIQUE in the database, while
+  // dreamz.txt repeats a few labels).
   const dropped: { number: number; reason: string }[] = [];
-  let strippedImages = 0;
   const seen = new Set<number>();
   const prepared: (SourceQuestion & { _number: number; _category: Cat })[] = [];
   for (const rawQuestion of data as SourceQuestion[]) {
     const reason = quarantineReason(rawQuestion);
     if (reason) { dropped.push({ number: rawQuestion.number, reason }); continue; }
-    // Drop an image that was mis-attached to a plain text question.
-    let src = rawQuestion;
-    if (hasSignMedia(rawQuestion) && !needsImage(rawQuestion)) {
-      src = { ...rawQuestion, image: undefined, signImageUrl: undefined, signSvg: undefined };
-      strippedImages++;
-    }
-    const q = normalizeQuestion(src);
+    const q = normalizeQuestion(rawQuestion);
     let number: number = q.number;
     while (seen.has(number)) number += 1000;
     seen.add(number);
     prepared.push({ ...q, _number: number, _category: categorize(q) });
   }
 
-  console.log(`Stripped mis-attached images from ${strippedImages} text questions.`);
   console.log(`Quarantined ${dropped.length} broken questions:`, dropped.map((d) => `#${d.number}(${d.reason})`).join(', '));
 
   const counts: Record<string, number> = {};
