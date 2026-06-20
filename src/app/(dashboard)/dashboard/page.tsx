@@ -3,8 +3,9 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProgressRing } from "@/components/layout/AuthChrome";
 import { db } from "@/db";
-import { courses, modules, quizAttempts } from "@/db/schema";
+import { modules, courses, quizAttempts } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
+import { getCourses, getModules } from "@/lib/catalog";
 
 const categories = [
   {
@@ -50,12 +51,32 @@ export default async function DashboardPage() {
   const userId = (session?.user as { id?: string } | undefined)?.id;
 
   // Progress per category = completed modules (Ibizamini done) / total modules.
-  const [allCourses, allModules, userAttempts] = await Promise.all([
-    db.select({ id: courses.id, category: courses.category }).from(courses),
-    db.select({ id: modules.id, courseId: modules.courseId }).from(modules),
+  // Catalog (courses/modules) is cached; the two user-specific queries run in
+  // parallel so a dashboard navigation is ~1 DB round-trip.
+  const [allCourses, allModules, userAttempts, recent] = await Promise.all([
+    getCourses(),
+    getModules(),
     userId
       ? db.select({ moduleId: quizAttempts.moduleId }).from(quizAttempts).where(eq(quizAttempts.userId, userId))
-      : Promise.resolve([] as { moduleId: string }[]),
+      : Promise.resolve([] as { moduleId: string | null }[]),
+    userId
+      ? db
+          .select({
+            id: quizAttempts.id,
+            score: quizAttempts.score,
+            passed: quizAttempts.passed,
+            kind: quizAttempts.kind,
+            attemptedAt: quizAttempts.attemptedAt,
+            moduleTitle: modules.title,
+            courseTitle: courses.title,
+          })
+          .from(quizAttempts)
+          .leftJoin(modules, eq(quizAttempts.moduleId, modules.id))
+          .leftJoin(courses, eq(modules.courseId, courses.id))
+          .where(eq(quizAttempts.userId, userId))
+          .orderBy(desc(quizAttempts.attemptedAt))
+          .limit(6)
+      : Promise.resolve([]),
   ]);
   const doneModules = new Set(userAttempts.map((a) => a.moduleId));
   const pctFor = (cat: string) => {
@@ -66,26 +87,6 @@ export default async function DashboardPage() {
     const done = mods.filter((m) => doneModules.has(m.id)).length;
     return Math.round((done / mods.length) * 100);
   };
-
-  // Recent attempts (module quizzes + mixed mock exams) for the activity feed.
-  const recent = userId
-    ? await db
-        .select({
-          id: quizAttempts.id,
-          score: quizAttempts.score,
-          passed: quizAttempts.passed,
-          kind: quizAttempts.kind,
-          attemptedAt: quizAttempts.attemptedAt,
-          moduleTitle: modules.title,
-          courseTitle: courses.title,
-        })
-        .from(quizAttempts)
-        .leftJoin(modules, eq(quizAttempts.moduleId, modules.id))
-        .leftJoin(courses, eq(modules.courseId, courses.id))
-        .where(eq(quizAttempts.userId, userId))
-        .orderBy(desc(quizAttempts.attemptedAt))
-        .limit(6)
-    : [];
 
   return (
     <div className="space-y-7">

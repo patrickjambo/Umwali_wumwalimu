@@ -1,23 +1,17 @@
-import { db } from "@/db";
 import { questions } from "@/db/schema";
-import { and, asc, eq } from "drizzle-orm";
 import QuizEngine from "@/components/quiz/QuizEngine";
 import { BackButton } from "@/components/layout/BackButton";
+import { getModuleQuestions } from "@/lib/catalog";
 
 const UUID_PATTERN = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
 
 export default async function QuizPage({ params }: { params: Promise<{ category: string, module: string }> }) {
   const p = await params;
 
+  // Cached per-module questions (moduleId is unique to a category, no DB hit on revisit).
   let qList: (typeof questions.$inferSelect)[] = [];
   if (UUID_PATTERN.test(p.module)) {
-    // Keep learners inside the selected 20-question module so groups do not mix.
-    qList = await db.select().from(questions)
-      .where(and(
-        eq(questions.category, p.category as any),
-        eq(questions.moduleId, p.module)
-      ))
-      .orderBy(asc(questions.number));
+    qList = await getModuleQuestions(p.module);
   }
   
   if (qList.length === 0) {

@@ -1,10 +1,8 @@
-import { db } from "@/db";
-import { courses, modules } from "@/db/schema";
-import { eq, asc } from "drizzle-orm";
 import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { BackButton } from "@/components/layout/BackButton";
 import { notFound } from "next/navigation";
+import { getCourses, getModules } from "@/lib/catalog";
 
 export default async function CategoryPage({ params }: { params: Promise<{ category: string }> }) {
   const p = await params;
@@ -13,21 +11,17 @@ export default async function CategoryPage({ params }: { params: Promise<{ categ
     notFound();
   }
 
-  // Fetch course and its modules
-  const courseList = await db.select().from(courses).where(eq(courses.category, p.category as any)).limit(1);
-  const course = courseList[0] || { id: "dummy", title: `Category: ${p.category}`, description: "Amasomo" };
-  
-  // For the sake of this mock, if no actual course exists, supply empty modules array.
-  let moduleList: any[] = [];
-  if (courseList.length > 0) {
-    moduleList = await db.select().from(modules).where(eq(modules.courseId, course.id)).orderBy(asc(modules.order));
-  } else {
-    // Generate default module wrapper for UI
-    moduleList = [
-      { id: "ikizamini-cyose", title: "Ikizamini Rusange (All Questions)", content: "Gerageza ibibazo byose muri iyi category", passingScore: 70 },
-      { id: "ikizamini-gito", title: "Ikizamini Gito (Quick Test)", content: "Ibibazo 10 by'igerageza", passingScore: 70 }
-    ];
-  }
+  // Course + its modules from the cached catalog (no DB round-trip on nav).
+  const [allCourses, allModules] = await Promise.all([getCourses(), getModules()]);
+  const found = allCourses.find((c) => c.category === (p.category as typeof c.category));
+  const course = found ?? { id: "dummy", title: `Category: ${p.category}`, description: "Amasomo" };
+
+  let moduleList: { id: string; title: string; content: string | null }[] = found
+    ? allModules.filter((m) => m.courseId === found.id)
+    : [
+        { id: "ikizamini-cyose", title: "Ikizamini Rusange (All Questions)", content: "Gerageza ibibazo byose muri iyi category" },
+        { id: "ikizamini-gito", title: "Ikizamini Gito (Quick Test)", content: "Ibibazo 10 by'igerageza" },
+      ];
 
   return (
     <div className="space-y-6">

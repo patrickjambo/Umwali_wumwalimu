@@ -1,8 +1,9 @@
 import { auth } from "@/lib/auth";
 import Link from "next/link";
 import { db } from "@/db";
-import { courses, modules, quizAttempts } from "@/db/schema";
+import { quizAttempts } from "@/db/schema";
 import { eq } from "drizzle-orm";
+import { getCourses, getModules } from "@/lib/catalog";
 import { Button } from "@/components/ui/button";
 import { ProgressRing } from "@/components/layout/AuthChrome";
 import { BackButton } from "@/components/layout/BackButton";
@@ -50,8 +51,8 @@ export default async function CoursesPage() {
   const userId = (session?.user as { id?: string } | undefined)?.id;
 
   const [allCourses, allModules, userAttempts] = await Promise.all([
-    db.select({ id: courses.id, category: courses.category }).from(courses),
-    db.select({ id: modules.id, courseId: modules.courseId }).from(modules),
+    getCourses(),
+    getModules(),
     userId
       ? db.select({ moduleId: quizAttempts.moduleId }).from(quizAttempts).where(eq(quizAttempts.userId, userId))
       : Promise.resolve([] as { moduleId: string | null }[]),
