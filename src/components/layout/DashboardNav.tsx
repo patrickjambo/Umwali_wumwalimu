@@ -26,11 +26,23 @@ const items = [
   },
 ];
 
-export function DashboardNav() {
+const adminItem = {
+  href: "/admin",
+  label: "Admin (Abakoresha)",
+  icon: (
+    <>
+      <path d="M12 3l7 3v5c0 4.5-3 7.5-7 9-4-1.5-7-4.5-7-9V6z" />
+      <path d="M9.5 12l1.8 1.8L15 10" />
+    </>
+  ),
+};
+
+export function DashboardNav({ isAdmin = false }: { isAdmin?: boolean }) {
   const pathname = usePathname();
+  const navItems = isAdmin ? [...items, adminItem] : items;
   return (
     <nav className="flex flex-col gap-1.5">
-      {items.map((it) => {
+      {navItems.map((it) => {
         const active = pathname === it.href || (it.href !== "/dashboard" && pathname.startsWith(it.href));
         return (
           <Link

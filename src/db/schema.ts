@@ -12,11 +12,19 @@ export const users = pgTable('users', {
   email:         text('email').unique().notNull(),
   passwordHash:  text('password_hash'),
   role:          text('role').default('student'), // student | admin | instructor
+  isActive:      boolean('is_active').default(true),           // admin can de/activate
+  accessExpiresAt: timestamp('access_expires_at'),             // trial / subscription end
   nationalId:    text('national_id').unique(),
   phone:         text('phone'),
   avatarUrl:     text('avatar_url'),
   createdAt:     timestamp('created_at').defaultNow(),
   updatedAt:     timestamp('updated_at').defaultNow(),
+});
+
+// Simple key/value app settings (e.g. default free-trial days, admin-editable).
+export const appSettings = pgTable('app_settings', {
+  key:   text('key').primaryKey(),
+  value: text('value').notNull(),
 });
 
 export const courses = pgTable('courses', {
