@@ -27,6 +27,13 @@ export const appSettings = pgTable('app_settings', {
   value: text('value').notNull(),
 });
 
+// Self-service password reset tokens (one-time, short-lived).
+export const passwordResetTokens = pgTable('password_reset_tokens', {
+  token:   text('token').primaryKey(),
+  userId:  uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+  expires: timestamp('expires').notNull(),
+});
+
 export const courses = pgTable('courses', {
   id:          uuid('id').defaultRandom().primaryKey(),
   slug:        text('slug').unique().notNull(),

@@ -112,7 +112,7 @@ export default function LoginPage() {
               {form.formState.errors.password && <p className="text-xs text-red-400">{form.formState.errors.password.message}</p>}
             </div>
             <div className="flex justify-end">
-              <Link href="#" className="text-xs text-cyan-300 hover:underline">Forgot Password?</Link>
+              <Link href="/forgot-password" className="text-xs text-cyan-300 hover:underline">Forgot Password?</Link>
             </div>
             {error && <p className="rounded-md border border-red-500/30 bg-red-500/10 p-2.5 text-xs text-red-300" role="alert">{error}</p>}
             <Button type="submit" disabled={isLoading} className="glow-btn h-11 w-full rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 font-semibold text-white hover:from-cyan-400 hover:to-sky-400">
