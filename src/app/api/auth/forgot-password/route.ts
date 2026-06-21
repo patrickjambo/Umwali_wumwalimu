@@ -31,12 +31,17 @@ export async function POST(req: Request) {
 
   const key = process.env.RESEND_API_KEY;
   let emailed = false;
+  let emailError: string | null = null;
   if (key && key !== "re_123") {
     try {
       const { Resend } = await import("resend");
       const resend = new Resend(key);
-      await resend.emails.send({
-        from: process.env.RESEND_FROM || "noreply@amategeko.rw",
+      // Default to Resend's shared sender, which needs NO domain verification
+      // (it can only deliver to your own Resend-account email until you verify
+      // a domain and set RESEND_FROM to e.g. noreply@your-domain).
+      const from = process.env.RESEND_FROM || "Amategeko <onboarding@resend.dev>";
+      const result = await resend.emails.send({
+        from,
         to: email,
         subject: "Gusubiramo ijambo ry'ibanga — Amategeko y'Umuhanda",
         html: `<p>Muraho ${user.name ?? ""},</p>
@@ -44,16 +49,24 @@ export async function POST(req: Request) {
 <p><a href="${link}">${link}</a></p>
 <p>Niba atari wowe wabisabye, irengagize ubu butumwa.</p>`,
       });
-      emailed = true;
-    } catch {
-      emailed = false;
+      // Resend returns { data, error } rather than throwing on API errors.
+      if (result?.error) {
+        emailError = `${result.error.name ?? "error"}: ${result.error.message ?? ""}`;
+      } else {
+        emailed = true;
+      }
+    } catch (e) {
+      emailError = e instanceof Error ? e.message : "send failed";
     }
+  } else {
+    emailError = "RESEND_API_KEY not set";
   }
-  console.log(`[password-reset] for ${email}: ${link} (emailed=${emailed})`);
+  console.log(`[password-reset] for ${email}: ${link} | emailed=${emailed}${emailError ? ` | error=${emailError}` : ""}`);
 
-  // Email not configured (e.g. local dev): surface the link so reset still works.
+  // If the email didn't go out (no key / unverified domain / dev), surface the
+  // link in non-production so reset still works; include the reason to debug.
   if (!emailed && process.env.NODE_ENV !== "production") {
-    return NextResponse.json({ message: GENERIC, devResetLink: link });
+    return NextResponse.json({ message: GENERIC, devResetLink: link, emailError });
   }
   return NextResponse.json({ message: GENERIC });
 }
