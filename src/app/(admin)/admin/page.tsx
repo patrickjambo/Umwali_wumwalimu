@@ -47,7 +47,10 @@ export default async function AdminUsersPage() {
       <div className="glass flex flex-col gap-3 rounded-2xl p-5 sm:flex-row sm:items-center sm:justify-between">
         <div>
           <h3 className="font-semibold text-white">Iminsi y&apos;igeragezwa (Free trial)</h3>
-          <p className="text-xs text-cyan-100/60">Iminsi buri konti nshya itangirana nayo ku buntu (ubu: {trial}).</p>
+          <p className="text-xs text-cyan-100/60">
+            Iminsi buri konti nshya itangirana nayo (ubu: {trial}). Igihe ubitse, iyi minsi
+            yongerwa kuri buri munyeshuri usanzwe uyifite munsi yayo (ntigabanya uyifite hejuru).
+          </p>
         </div>
         <form action={setDefaultTrialForm} className="flex items-center gap-2">
           <input name="days" type="number" min={0} defaultValue={trial} className="h-10 w-24 rounded-lg border border-cyan-400/20 bg-white/5 px-3 text-white outline-none focus:border-cyan-400/60" />

@@ -2,7 +2,7 @@
 import { auth } from "@/lib/auth";
 import { db } from "@/db";
 import { users, appSettings } from "@/db/schema";
-import { eq } from "drizzle-orm";
+import { eq, and, or, ne, lt, isNull } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
 
 async function requireAdmin() {
@@ -42,15 +42,34 @@ export async function addUserDaysForm(userId: string, formData: FormData) {
   revalidatePath("/admin");
 }
 
-// Admin-editable default free-trial length for new accounts.
+// Admin-editable default free-trial length. Saving it (a) sets what new
+// accounts get and (b) grants every existing student AT LEAST that many days
+// from now — extending anyone below it, never shortening users who have more.
 export async function setDefaultTrialForm(formData: FormData) {
   await requireAdmin();
   const d = parseInt(String(formData.get("days") ?? ""), 10);
-  if (Number.isFinite(d) && d >= 0) {
-    await db
-      .insert(appSettings)
-      .values({ key: "default_trial_days", value: String(d) })
-      .onConflictDoUpdate({ target: appSettings.key, set: { value: String(d) } });
+  if (!Number.isFinite(d) || d < 0) {
+    revalidatePath("/admin");
+    return;
   }
+
+  await db
+    .insert(appSettings)
+    .values({ key: "default_trial_days", value: String(d) })
+    .onConflictDoUpdate({ target: appSettings.key, set: { value: String(d) } });
+
+  // Apply to existing non-admin users: bump expiry up to now+d days for anyone
+  // currently below it (don't reduce longer/paid access, don't touch admins).
+  const target = new Date(Date.now() + d * 86_400_000);
+  await db
+    .update(users)
+    .set({ accessExpiresAt: target })
+    .where(
+      and(
+        or(isNull(users.role), ne(users.role, "admin")),
+        or(isNull(users.accessExpiresAt), lt(users.accessExpiresAt, target)),
+      ),
+    );
+
   revalidatePath("/admin");
 }
