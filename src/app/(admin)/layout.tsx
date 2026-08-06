@@ -5,6 +5,7 @@ import { TechBackground } from "@/components/layout/TechBackground";
 
 const navItems = [
   { href: "/admin", label: "Abakoresha (Users)" },
+  { href: "/admin/exams", label: "Gutunganya Ibizamini" },
   { href: "/admin/questions", label: "Ibibazo (Questions)" },
   { href: "/admin/certificates", label: "Ibyemezo (Certificates)" },
 ];

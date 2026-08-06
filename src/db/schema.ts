@@ -34,6 +34,15 @@ export const passwordResetTokens = pgTable('password_reset_tokens', {
   expires: timestamp('expires').notNull(),
 });
 
+// Exams generated from a topic/video seed by matching our own question bank.
+export const generatedExams = pgTable('generated_exams', {
+  id:          uuid('id').defaultRandom().primaryKey(),
+  title:       text('title').notNull(),
+  sourceUrl:   text('source_url'),          // e.g. the YouTube video used as a hint
+  questionIds: jsonb('question_ids').notNull(), // string[] of question ids, in order
+  createdAt:   timestamp('created_at').defaultNow(),
+});
+
 export const courses = pgTable('courses', {
   id:          uuid('id').defaultRandom().primaryKey(),
   slug:        text('slug').unique().notNull(),

@@ -27,3 +27,13 @@ export const getModuleQuestions = unstable_cache(
   ["catalog:module-questions"],
   { revalidate: REVALIDATE, tags: ["catalog"] }
 );
+
+// Lightweight index (no images) used to match exam topics against the bank.
+export const getQuestionsIndex = unstable_cache(
+  async () =>
+    db
+      .select({ id: questions.id, text: questions.text, options: questions.options, category: questions.category })
+      .from(questions),
+  ["catalog:questions-index"],
+  { revalidate: REVALIDATE, tags: ["catalog"] }
+);

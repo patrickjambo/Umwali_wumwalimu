@@ -3,7 +3,7 @@ import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { ProgressRing } from "@/components/layout/AuthChrome";
 import { db } from "@/db";
-import { modules, courses, quizAttempts } from "@/db/schema";
+import { modules, courses, quizAttempts, generatedExams } from "@/db/schema";
 import { eq, desc } from "drizzle-orm";
 import { getCourses, getModules } from "@/lib/catalog";
 
@@ -53,7 +53,7 @@ export default async function DashboardPage() {
   // Progress per category = completed modules (Ibizamini done) / total modules.
   // Catalog (courses/modules) is cached; the two user-specific queries run in
   // parallel so a dashboard navigation is ~1 DB round-trip.
-  const [allCourses, allModules, userAttempts, recent] = await Promise.all([
+  const [allCourses, allModules, userAttempts, recent, dailyExam] = await Promise.all([
     getCourses(),
     getModules(),
     userId
@@ -77,6 +77,12 @@ export default async function DashboardPage() {
           .orderBy(desc(quizAttempts.attemptedAt))
           .limit(6)
       : Promise.resolve([]),
+    db
+      .select({ id: generatedExams.id, title: generatedExams.title, questionIds: generatedExams.questionIds })
+      .from(generatedExams)
+      .orderBy(desc(generatedExams.createdAt))
+      .limit(1)
+      .then((r) => r[0]),
   ]);
   const doneModules = new Set(userAttempts.map((a) => a.moduleId));
   const pctFor = (cat: string) => {
@@ -105,6 +111,32 @@ export default async function DashboardPage() {
           </div>
         </div>
       </div>
+
+      {/* Daily exam generated from the latest topic/video (if any) */}
+      {dailyExam && (
+        <Link href={`/exam/${dailyExam.id}`} className="hud glass is-interactive relative block overflow-hidden rounded-2xl border-emerald-400/30 p-6 transition-all">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+            <div className="flex items-start gap-4">
+              <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-emerald-400/15 text-emerald-300">
+                <svg viewBox="0 0 24 24" className="h-6 w-6" fill="none" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M8 2v4M16 2v4M3 10h18M5 6h14a1 1 0 011 1v13a1 1 0 01-1 1H5a1 1 0 01-1-1V7a1 1 0 011-1z" />
+                  <path d="M9 15l2 2 4-4" />
+                </svg>
+              </div>
+              <div>
+                <span className="rounded-full bg-emerald-400/15 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-300">Ikizamini ry&apos;Uyu Munsi</span>
+                <h3 className="mt-1.5 text-lg font-bold text-white">{dailyExam.title}</h3>
+                <p className="mt-1 text-sm text-cyan-100/65">
+                  Ibibazo {Array.isArray(dailyExam.questionIds) ? (dailyExam.questionIds as string[]).length : 0} • byatoranyijwe hakurikijwe ibizamini bya buri munsi.
+                </p>
+              </div>
+            </div>
+            <span className="glow-btn inline-flex h-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-6 font-semibold text-white">
+              Tangira ⏱
+            </span>
+          </div>
+        </Link>
+      )}
 
       {/* Timed mock exam: 20 random questions mixed across A, B & C in 20 min */}
       <Link href="/exam" className="hud glass is-interactive relative block overflow-hidden rounded-2xl p-6 transition-all">
