@@ -1,13 +1,17 @@
 import { db } from "@/db";
-import { generatedExams } from "@/db/schema";
-import { desc } from "drizzle-orm";
+import { generatedExams, appSettings } from "@/db/schema";
+import { desc, eq } from "drizzle-orm";
 import Link from "next/link";
-import { generateExamAction, deleteExamAction } from "./actions";
+import { generateExamAction, deleteExamAction, setYoutubeSourceAction, runDailyNowAction } from "./actions";
 
 export const dynamic = "force-dynamic";
 
 export default async function AdminExamsPage() {
-  const exams = await db.select().from(generatedExams).orderBy(desc(generatedExams.createdAt)).limit(30);
+  const [exams, sourceRow] = await Promise.all([
+    db.select().from(generatedExams).orderBy(desc(generatedExams.createdAt)).limit(30),
+    db.select().from(appSettings).where(eq(appSettings.key, "youtube_source")).limit(1),
+  ]);
+  const youtubeSource = sourceRow[0]?.value ?? "";
 
   return (
     <div className="space-y-6">
@@ -20,7 +24,28 @@ export default async function AdminExamsPage() {
         </p>
       </div>
 
-      {/* Generate form */}
+      {/* Automatic daily generation */}
+      <div className="glass space-y-4 rounded-2xl border-emerald-400/25 p-5">
+        <div className="flex items-center gap-2">
+          <span className="rounded-full bg-emerald-400/15 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-300">Buri munsi (Automatic)</span>
+          <h3 className="font-semibold text-white">Ikizamini cya buri munsi kiva kuri YouTube</h3>
+        </div>
+        <p className="text-xs text-cyan-100/60">
+          Shyiraho URL ya channel (urugero: <span className="text-cyan-200">https://www.youtube.com/@TeacherNkotanyi</span>).
+          Buri munsi sisitemu izareba video iheruka, ihitemo ibibazo bisa biva mu bubiko bwacu, ikore ikizamini.
+        </p>
+        <form action={setYoutubeSourceAction} className="flex flex-col gap-2 sm:flex-row">
+          <input name="source" defaultValue={youtubeSource} placeholder="https://www.youtube.com/@channel  (cyangwa /channel/UC…, cyangwa link ya video)" className="h-10 flex-1 rounded-lg border border-cyan-400/20 bg-white/5 px-3 text-sm text-white outline-none focus:border-cyan-400/60" />
+          <button type="submit" className="h-10 rounded-lg border border-cyan-400/25 bg-white/5 px-4 text-sm font-semibold text-cyan-100 hover:bg-white/10">Bika channel</button>
+        </form>
+        <form action={runDailyNowAction}>
+          <button type="submit" className="glow-btn h-10 rounded-xl bg-gradient-to-r from-emerald-500 to-teal-500 px-5 text-sm font-semibold text-white">
+            ⟳ Kora ubu (video iheruka)
+          </button>
+        </form>
+      </div>
+
+      {/* Manual generate form */}
       <form action={generateExamAction} className="glass space-y-4 rounded-2xl p-5">
         <div className="grid gap-4 md:grid-cols-2">
           <div className="space-y-1.5">

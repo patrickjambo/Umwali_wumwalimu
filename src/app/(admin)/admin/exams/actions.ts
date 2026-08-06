@@ -1,10 +1,11 @@
 "use server";
 import { auth } from "@/lib/auth";
 import { db } from "@/db";
-import { generatedExams } from "@/db/schema";
+import { generatedExams, appSettings } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getQuestionsIndex } from "@/lib/catalog";
 import { pickQuestionsForSeed, fetchYouTubeHint } from "@/lib/exam-generator";
+import { runDailyExamFromSettings } from "@/lib/daily-exam";
 import { revalidatePath } from "next/cache";
 
 async function requireAdmin() {
@@ -43,6 +44,27 @@ export async function generateExamAction(formData: FormData) {
 export async function deleteExamAction(id: string) {
   await requireAdmin();
   await db.delete(generatedExams).where(eq(generatedExams.id, id));
+  revalidatePath("/admin/exams");
+  revalidatePath("/dashboard");
+}
+
+// Save the YouTube source (channel URL/@handle/id or a video URL) the daily
+// job pulls from.
+export async function setYoutubeSourceAction(formData: FormData) {
+  await requireAdmin();
+  const source = String(formData.get("source") ?? "").trim();
+  await db
+    .insert(appSettings)
+    .values({ key: "youtube_source", value: source })
+    .onConflictDoUpdate({ target: appSettings.key, set: { value: source } });
+  revalidatePath("/admin/exams");
+}
+
+// Trigger the daily generation immediately (same logic the cron runs), forcing
+// a fresh exam even if the latest video was already used.
+export async function runDailyNowAction() {
+  await requireAdmin();
+  await runDailyExamFromSettings(true);
   revalidatePath("/admin/exams");
   revalidatePath("/dashboard");
 }

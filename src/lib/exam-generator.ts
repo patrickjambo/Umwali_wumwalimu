@@ -74,3 +74,49 @@ export async function fetchYouTubeHint(url: string): Promise<string | null> {
     return null;
   }
 }
+
+const decodeXml = (s: string) =>
+  s
+    .replace(/&amp;/g, "&")
+    .replace(/&lt;/g, "<")
+    .replace(/&gt;/g, ">")
+    .replace(/&quot;/g, '"')
+    .replace(/&#3?9;|&apos;/g, "'")
+    .trim();
+
+/** Resolve a channel id (UC…) from a channel id, /channel/ URL, or @handle URL. */
+export async function resolveChannelId(source: string): Promise<string | null> {
+  const s = source.trim();
+  if (/^UC[\w-]{20,}$/.test(s)) return s;
+  const direct = s.match(/channel\/(UC[\w-]{20,})/);
+  if (direct) return direct[1];
+  try {
+    const url = s.startsWith("http") ? s : `https://www.youtube.com/${s.replace(/^\//, "")}`;
+    const res = await fetch(url, { headers: { "user-agent": "Mozilla/5.0" }, cache: "no-store" });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const m = html.match(/"channelId":"(UC[\w-]{20,})"/) || html.match(/channel\/(UC[\w-]{20,})/);
+    return m ? m[1] : null;
+  } catch {
+    return null;
+  }
+}
+
+/** Newest video (id, title, url) of a channel via its public RSS feed (no key). */
+export async function fetchLatestChannelVideo(
+  channelId: string,
+): Promise<{ videoId: string; title: string; url: string } | null> {
+  try {
+    const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, { cache: "no-store" });
+    if (!res.ok) return null;
+    const xml = await res.text();
+    const entry = xml.split("<entry>")[1];
+    if (!entry) return null;
+    const videoId = (entry.match(/<yt:videoId>([\w-]+)<\/yt:videoId>/) || [])[1];
+    if (!videoId) return null;
+    const title = decodeXml((entry.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "");
+    return { videoId, title, url: `https://www.youtube.com/watch?v=${videoId}` };
+  } catch {
+    return null;
+  }
+}
