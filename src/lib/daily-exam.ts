@@ -2,7 +2,7 @@ import { db } from "@/db";
 import { appSettings, generatedExams } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getQuestionsIndex } from "@/lib/catalog";
-import { pickQuestionsForSeed, fetchYouTubeHint, resolveChannelId, fetchLatestChannelVideo } from "@/lib/exam-generator";
+import { pickQuestionsForSeed, fetchYouTubeVideoInfo, resolveChannelId, fetchLatestChannelVideo } from "@/lib/exam-generator";
 
 async function getSetting(key: string): Promise<string | null> {
   const r = await db.select().from(appSettings).where(eq(appSettings.key, key)).limit(1);
@@ -40,11 +40,11 @@ async function computeDaily(force: boolean): Promise<DailyResult> {
   const source = (await getSetting("youtube_source"))?.trim();
   if (!source) return { status: "skipped", reason: "Nta youtube_source yashyizweho" };
 
-  let video: { videoId: string; title: string; url: string } | null = null;
+  let video: { videoId: string; title: string; url: string; description: string } | null = null;
   if (/watch\?v=|youtu\.be\//.test(source)) {
-    const title = (await fetchYouTubeHint(source)) ?? "";
+    const info = await fetchYouTubeVideoInfo(source);
     const m = source.match(/[?&]v=([\w-]+)/) || source.match(/youtu\.be\/([\w-]+)/);
-    video = { videoId: (m && m[1]) || source, title, url: source };
+    video = { videoId: (m && m[1]) || source, title: info?.title ?? "", url: source, description: info?.description ?? "" };
   } else {
     const channelId = await resolveChannelId(source);
     if (!channelId) return { status: "error", reason: "Ntibyashobotse kubona channel (reba URL)" };
@@ -60,7 +60,8 @@ async function computeDaily(force: boolean): Promise<DailyResult> {
   }
 
   const index = await getQuestionsIndex();
-  const ids = pickQuestionsForSeed(index, video.title, 20);
+  const seed = `${video.title} ${video.description}`.trim();
+  const ids = pickQuestionsForSeed(index, seed, 20);
   const title = video.title ? `Ikizamini: ${video.title.slice(0, 90)}` : `Ikizamini ${new Date().toLocaleDateString("en-GB")}`;
 
   const [row] = await db.insert(generatedExams).values({ title, sourceUrl: video.url, questionIds: ids }).returning({ id: generatedExams.id });

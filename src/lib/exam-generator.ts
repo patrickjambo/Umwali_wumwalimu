@@ -60,9 +60,40 @@ export function pickQuestionsForSeed(index: IndexQ[], seedText: string, count = 
   return chosen;
 }
 
-/** Read a YouTube video's title + author via oEmbed (no API key). Best-effort. */
+const unescapeJson = (s: string) => {
+  try {
+    return JSON.parse(`"${s}"`);
+  } catch {
+    return s;
+  }
+};
+
+/** Read a video's title + description from its watch page (richer seed than the
+ *  title alone; teachers usually list the day's topics in the description). */
+export async function fetchYouTubeVideoInfo(url: string): Promise<{ title: string; description: string } | null> {
+  try {
+    const res = await fetch(url, {
+      headers: { "user-agent": "Mozilla/5.0", "accept-language": "rw,en;q=0.9" },
+      cache: "no-store",
+    });
+    if (!res.ok) return null;
+    const html = await res.text();
+    const title =
+      unescapeJson((html.match(/"title":\s*"((?:[^"\\]|\\.)*)"/) || [])[1] || "").trim() ||
+      decodeXml((html.match(/<title>([^<]*)<\/title>/) || [])[1] || "").replace(/ - YouTube$/, "").trim();
+    const description = unescapeJson((html.match(/"shortDescription":\s*"((?:[^"\\]|\\.)*)"/) || [])[1] || "").trim();
+    if (!title && !description) return null;
+    return { title, description };
+  } catch {
+    return null;
+  }
+}
+
+/** Best-effort seed text (title + description) for a single video URL. */
 export async function fetchYouTubeHint(url: string): Promise<string | null> {
   if (!/youtu\.?be/.test(url)) return null;
+  const info = await fetchYouTubeVideoInfo(url);
+  if (info && (info.title || info.description)) return `${info.title} ${info.description}`.trim();
   try {
     const res = await fetch(`https://www.youtube.com/oembed?url=${encodeURIComponent(url)}&format=json`, {
       cache: "no-store",
@@ -102,10 +133,10 @@ export async function resolveChannelId(source: string): Promise<string | null> {
   }
 }
 
-/** Newest video (id, title, url) of a channel via its public RSS feed (no key). */
+/** Newest video (id, title, url, description) of a channel via its RSS feed. */
 export async function fetchLatestChannelVideo(
   channelId: string,
-): Promise<{ videoId: string; title: string; url: string } | null> {
+): Promise<{ videoId: string; title: string; url: string; description: string } | null> {
   try {
     const res = await fetch(`https://www.youtube.com/feeds/videos.xml?channel_id=${channelId}`, { cache: "no-store" });
     if (!res.ok) return null;
@@ -115,7 +146,8 @@ export async function fetchLatestChannelVideo(
     const videoId = (entry.match(/<yt:videoId>([\w-]+)<\/yt:videoId>/) || [])[1];
     if (!videoId) return null;
     const title = decodeXml((entry.match(/<title>([\s\S]*?)<\/title>/) || [])[1] || "");
-    return { videoId, title, url: `https://www.youtube.com/watch?v=${videoId}` };
+    const description = decodeXml((entry.match(/<media:description>([\s\S]*?)<\/media:description>/) || [])[1] || "");
+    return { videoId, title, url: `https://www.youtube.com/watch?v=${videoId}`, description };
   } catch {
     return null;
   }
