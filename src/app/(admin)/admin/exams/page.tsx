@@ -7,11 +7,14 @@ import { generateExamAction, deleteExamAction, setYoutubeSourceAction, runDailyN
 export const dynamic = "force-dynamic";
 
 export default async function AdminExamsPage() {
-  const [exams, sourceRow] = await Promise.all([
+  const [exams, settingsRows] = await Promise.all([
     db.select().from(generatedExams).orderBy(desc(generatedExams.createdAt)).limit(30),
-    db.select().from(appSettings).where(eq(appSettings.key, "youtube_source")).limit(1),
+    db.select().from(appSettings),
   ]);
-  const youtubeSource = sourceRow[0]?.value ?? "";
+  const settings = new Map(settingsRows.map((s) => [s.key, s.value]));
+  const youtubeSource = settings.get("youtube_source") ?? "";
+  const lastRunAt = settings.get("last_exam_run_at");
+  const lastRunStatus = settings.get("last_exam_run_status");
 
   return (
     <div className="space-y-6">
@@ -43,6 +46,13 @@ export default async function AdminExamsPage() {
             ⟳ Kora ubu (video iheruka)
           </button>
         </form>
+        {lastRunAt && (
+          <div className="rounded-lg border border-cyan-400/15 bg-white/5 p-2.5 text-xs text-cyan-100/70">
+            <span className="font-semibold text-cyan-200">Igihe cyanyuma cyakoze:</span>{" "}
+            {new Date(lastRunAt).toLocaleString("en-GB")}
+            {lastRunStatus ? <> — {lastRunStatus}</> : null}
+          </div>
+        )}
       </div>
 
       {/* Manual generate form */}

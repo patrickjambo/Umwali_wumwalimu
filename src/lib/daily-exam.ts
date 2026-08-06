@@ -24,6 +24,19 @@ export type DailyResult =
  * video URL). Deduped via last_exam_video_id. Used by the cron + "Run now".
  */
 export async function runDailyExamFromSettings(force = false): Promise<DailyResult> {
+  const result = await computeDaily(force);
+  const summary =
+    result.status === "created"
+      ? `Byakozwe: ${result.title}`
+      : result.status === "skipped"
+        ? `Byasimbutse: ${result.reason}`
+        : `Ikibazo: ${result.reason}`;
+  await setSetting("last_exam_run_at", new Date().toISOString());
+  await setSetting("last_exam_run_status", summary);
+  return result;
+}
+
+async function computeDaily(force: boolean): Promise<DailyResult> {
   const source = (await getSetting("youtube_source"))?.trim();
   if (!source) return { status: "skipped", reason: "Nta youtube_source yashyizweho" };
 
