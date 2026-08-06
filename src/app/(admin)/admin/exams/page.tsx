@@ -72,8 +72,15 @@ export default async function AdminExamsPage() {
           <input name="url" type="url" placeholder="https://www.youtube.com/watch?v=..." className="h-10 w-full rounded-lg border border-cyan-400/20 bg-white/5 px-3 text-sm text-white outline-none focus:border-cyan-400/60" />
         </div>
         <div className="space-y-1.5">
-          <label className="text-xs font-medium text-cyan-100/70">Insanganyamatsiko / ibibazo bivugwa muri video (bifasha guhitamo neza)</label>
-          <textarea name="text" rows={4} placeholder="Andika insanganyamatsiko cyangwa amagambo y'ingenzi (urugero: ibyapa, umuvuduko ntarengwa, amatara, kunyuranaho, gutambuka mbere...)" className="w-full rounded-lg border border-cyan-400/20 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-cyan-400/60" />
+          <label className="text-xs font-medium text-cyan-100/70">
+            Andika ibibazo wabonye muri video — <span className="text-cyan-300">kimwe ku murongo</span> (buri kibazo kizahuzwa n&apos;ikiri mu bubiko bwacu hamwe n&apos;igisubizo cyacyo)
+          </label>
+          <textarea name="questions" rows={7} placeholder={"Icyapa gitukura gisobanura iki?\nUmuvuduko ntarengwa mu mujyi ni uwuhe?\nNi ryari ushobora kunyuranaho?\n..."} className="w-full rounded-lg border border-cyan-400/20 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-cyan-400/60" />
+          <p className="text-[11px] text-cyan-100/50">Kuko ububiko bwacu bukoresheje ibibazo bya Polisi bimwe, ibibazo byanditse akenshi bizahura neza n&apos;ibyo muri video.</p>
+        </div>
+        <div className="space-y-1.5">
+          <label className="text-xs font-medium text-cyan-100/70">Cyangwa insanganyamatsiko gusa (iyo utanditse ibibazo)</label>
+          <textarea name="text" rows={2} placeholder="ibyapa, umuvuduko ntarengwa, amatara, kunyuranaho, gutambuka mbere..." className="w-full rounded-lg border border-cyan-400/20 bg-white/5 px-3 py-2 text-sm text-white outline-none focus:border-cyan-400/60" />
         </div>
         <button type="submit" className="glow-btn h-10 rounded-xl bg-gradient-to-r from-cyan-500 to-sky-500 px-6 text-sm font-semibold text-white">
           ⚙ Kora Ikizamini

@@ -60,6 +60,47 @@ export function pickQuestionsForSeed(index: IndexQ[], seedText: string, count = 
   return chosen;
 }
 
+const questionTokens = (q: IndexQ) => {
+  const opts = Array.isArray(q.options) ? (q.options as { text?: string }[]).map((o) => o?.text ?? "").join(" ") : "";
+  return new Set(tokenize(`${q.text} ${opts}`));
+};
+
+/**
+ * Match a pasted list (one question per line) to the closest bank question per
+ * line — so a teacher who typed the questions from the video gets those same
+ * questions (with OUR answers) from the bank. Returns ordered, de-duped ids.
+ */
+export function matchQuestionsByLines(index: IndexQ[], text: string, max = 20): string[] {
+  const lines = text
+    .split(/\r?\n+/)
+    .map((l) => l.replace(/^\s*(\d+[.)]|[-*•])\s*/, "").trim()) // strip "1.", "-", bullets
+    .filter((l) => l.length > 3);
+
+  const used = new Set<string>();
+  const result: string[] = [];
+  for (const line of lines) {
+    if (result.length >= max) break;
+    const seed = new Set(tokenize(line));
+    if (seed.size === 0) continue;
+    let best: IndexQ | null = null;
+    let bestScore = 0;
+    for (const q of index) {
+      if (used.has(q.id)) continue;
+      let s = 0;
+      for (const t of questionTokens(q)) if (seed.has(t)) s++;
+      if (s > bestScore) {
+        bestScore = s;
+        best = q;
+      }
+    }
+    if (best && bestScore > 0) {
+      used.add(best.id);
+      result.push(best.id);
+    }
+  }
+  return result;
+}
+
 const unescapeJson = (s: string) => {
   try {
     return JSON.parse(`"${s}"`);

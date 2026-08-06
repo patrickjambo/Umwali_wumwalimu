@@ -4,7 +4,7 @@ import { db } from "@/db";
 import { generatedExams, appSettings } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getQuestionsIndex } from "@/lib/catalog";
-import { pickQuestionsForSeed, fetchYouTubeHint } from "@/lib/exam-generator";
+import { pickQuestionsForSeed, matchQuestionsByLines, fetchYouTubeHint } from "@/lib/exam-generator";
 import { runDailyExamFromSettings } from "@/lib/daily-exam";
 import { revalidatePath } from "next/cache";
 
@@ -32,7 +32,25 @@ export async function generateExamAction(formData: FormData) {
   }
 
   const index = await getQuestionsIndex();
-  const ids = pickQuestionsForSeed(index, seed, count);
+  // If a question list is pasted (one per line), match each line to the bank;
+  // otherwise fall back to topic/keyword matching over the whole seed.
+  const questionsText = String(formData.get("questions") ?? "").trim();
+  let ids: string[];
+  if (questionsText) {
+    ids = matchQuestionsByLines(index, questionsText, count);
+    if (ids.length < count) {
+      const have = new Set(ids);
+      for (const extra of pickQuestionsForSeed(index, `${questionsText} ${seed}`, count)) {
+        if (ids.length >= count) break;
+        if (!have.has(extra)) {
+          ids.push(extra);
+          have.add(extra);
+        }
+      }
+    }
+  } else {
+    ids = pickQuestionsForSeed(index, seed, count);
+  }
   if (!title) title = `Ikizamini ${new Date().toLocaleDateString("en-GB")}`;
 
   await db.insert(generatedExams).values({ title, sourceUrl: url || null, questionIds: ids });
