@@ -1,13 +1,11 @@
 import { db } from "@/db";
-import { questions, appSettings } from "@/db/schema";
-import { eq, and, asc, isNotNull } from "drizzle-orm";
+import { questions, examSeen } from "@/db/schema";
+import { eq, and, sql, isNotNull, notInArray, inArray } from "drizzle-orm";
 
 type Q = typeof questions.$inferSelect;
 
 // Official police-exam composition: 20 questions = 5 from each group, in order.
-// The two picture groups (sign, roadpic) only pull questions that actually have
-// an image. Each group keeps a rotating cursor so successive exams cycle
-// through the whole group in order ("looping") and never repeat within one exam.
+// The two picture groups (sign, roadpic) only pull questions that have an image.
 const GROUPS = [
   { key: "sign", n: 5, imageOnly: true }, // ibyapa: symbols/direction/prohibitory/warning
   { key: "number", n: 5, imageOnly: false }, // ibipimo / numeric
@@ -15,36 +13,39 @@ const GROUPS = [
   { key: "roadpic", n: 5, imageOnly: true }, // road-scene pictures
 ] as const;
 
-async function getCursor(key: string): Promise<number> {
-  const r = await db.select().from(appSettings).where(eq(appSettings.key, key)).limit(1);
-  const v = parseInt(r[0]?.value ?? "0", 10);
-  return Number.isFinite(v) && v >= 0 ? v : 0;
-}
-async function setCursor(key: string, value: number) {
-  const val = String(value);
-  await db.insert(appSettings).values({ key, value: val }).onConflictDoUpdate({ target: appSettings.key, set: { value: val } });
-}
+const groupWhere = (key: string, imageOnly: boolean) =>
+  and(eq(questions.examGroup, key), imageOnly ? isNotNull(questions.signImageUrl) : undefined);
 
 /**
- * Build a 20-question exam grouped as sign → number → analysis → roadpic,
- * rotating through each group so it loops in order across attempts, with no
- * repeats inside a single exam.
+ * Build a 20-question exam (sign → number → analysis → roadpic) for a user,
+ * pulling only questions they haven't seen before so nothing repeats across
+ * their attempts. When a group's unseen pool runs low, that group is reset
+ * (its "seen" rows cleared) so it loops afresh. Questions are marked seen on
+ * submit (see /api/quiz), so an un-submitted reload keeps the same set.
  */
-export async function buildRotatingExam(): Promise<Q[]> {
+export async function buildRotatingExam(userId?: string): Promise<Q[]> {
   const out: Q[] = [];
   for (const g of GROUPS) {
-    const pool = await db
-      .select()
-      .from(questions)
-      .where(and(eq(questions.examGroup, g.key), g.imageOnly ? isNotNull(questions.signImageUrl) : undefined))
-      .orderBy(asc(questions.number));
-    if (pool.length === 0) continue;
+    let picked: Q[];
+    if (userId) {
+      const seenSub = db.select({ id: examSeen.questionId }).from(examSeen).where(eq(examSeen.userId, userId));
+      picked = await db
+        .select()
+        .from(questions)
+        .where(and(groupWhere(g.key, g.imageOnly), notInArray(questions.id, seenSub)))
+        .orderBy(sql`random()`)
+        .limit(g.n);
 
-    const cursorKey = `exam_cur_${g.key}`;
-    const start = (await getCursor(cursorKey)) % pool.length;
-    const take = Math.min(g.n, pool.length);
-    for (let i = 0; i < take; i++) out.push(pool[(start + i) % pool.length]);
-    await setCursor(cursorKey, (start + take) % pool.length);
+      // Group exhausted for this user → clear its seen rows and re-pick fresh.
+      if (picked.length < g.n) {
+        const groupIds = db.select({ id: questions.id }).from(questions).where(eq(questions.examGroup, g.key));
+        await db.delete(examSeen).where(and(eq(examSeen.userId, userId), inArray(examSeen.questionId, groupIds)));
+        picked = await db.select().from(questions).where(groupWhere(g.key, g.imageOnly)).orderBy(sql`random()`).limit(g.n);
+      }
+    } else {
+      picked = await db.select().from(questions).where(groupWhere(g.key, g.imageOnly)).orderBy(sql`random()`).limit(g.n);
+    }
+    out.push(...picked);
   }
   return out;
 }

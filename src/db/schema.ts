@@ -34,6 +34,14 @@ export const passwordResetTokens = pgTable('password_reset_tokens', {
   expires: timestamp('expires').notNull(),
 });
 
+// Per-user record of questions already served in a mock exam, so rotation
+// never repeats a question for a user until their group pool is exhausted.
+export const examSeen = pgTable('exam_seen', {
+  userId:     uuid('user_id').references(() => users.id, { onDelete: 'cascade' }).notNull(),
+  questionId: uuid('question_id').references(() => questions.id, { onDelete: 'cascade' }).notNull(),
+  seenAt:     timestamp('seen_at').defaultNow(),
+}, (t) => ([primaryKey({ columns: [t.userId, t.questionId] })]));
+
 // Exams generated from a topic/video seed by matching our own question bank.
 export const generatedExams = pgTable('generated_exams', {
   id:          uuid('id').defaultRandom().primaryKey(),

@@ -1,14 +1,17 @@
 import QuizEngine from "@/components/quiz/QuizEngine";
 import { BackButton } from "@/components/layout/BackButton";
 import { buildRotatingExam } from "@/lib/exam-builder";
+import { auth } from "@/lib/auth";
 
 // Always render fresh so the rotating question set differs each visit.
 export const dynamic = "force-dynamic";
 
 export default async function ExamPage() {
   // Police-exam layout: 5 ibyapa + 5 imibare + 5 isesengura + 5 amafoto,
-  // rotating through the bank so each attempt is fresh, with no repeats.
-  const qList = await buildRotatingExam();
+  // pulling only questions this user hasn't seen so attempts don't repeat.
+  const session = await auth();
+  const userId = (session?.user as { id?: string } | undefined)?.id;
+  const qList = await buildRotatingExam(userId);
 
   return (
     <div className="py-8">

@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { db } from "@/db";
-import { quizAttempts } from "@/db/schema";
+import { quizAttempts, examSeen } from "@/db/schema";
 import { auth } from "@/lib/auth";
 
 const UUID = /^[0-9a-f]{8}-[0-9a-f]{4}-[1-5][0-9a-f]{3}-[89ab][0-9a-f]{3}-[0-9a-f]{12}$/i;
@@ -39,6 +39,16 @@ export async function POST(req: Request) {
       passed: Boolean(passed),
       answers: Array.isArray(answers) ? answers : [],
     });
+
+    // For mock exams, remember which questions this user has now seen so the
+    // rotating builder won't serve them again until the pool is exhausted.
+    if (isExam && Array.isArray(answers)) {
+      const seen = answers
+        .map((a) => (a as { questionId?: string })?.questionId)
+        .filter((id): id is string => typeof id === "string" && UUID.test(id))
+        .map((questionId) => ({ userId, questionId }));
+      if (seen.length) await db.insert(examSeen).values(seen).onConflictDoNothing();
+    }
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json({ error: "could not save attempt" }, { status: 500 });
