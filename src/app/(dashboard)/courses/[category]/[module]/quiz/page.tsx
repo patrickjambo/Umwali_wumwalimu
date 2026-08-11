@@ -32,6 +32,7 @@ export default async function QuizPage({ params }: { params: Promise<{ category:
       explanation: "Igisubizo nyacyo ni A kubera...",
       signImageUrl: null,
       signSvg: p.category === "ibyapa" ? `<svg width="100" height="100" viewBox="0 0 100 100"><circle cx="50" cy="50" r="40" stroke="red" stroke-width="10" fill="white" /><text x="50" y="55" font-size="30" text-anchor="middle" fill="black">50</text></svg>` : null,
+      examGroup: null,
       moduleId: p.module,
       createdAt: new Date(),
     }));

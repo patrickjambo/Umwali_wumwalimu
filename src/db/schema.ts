@@ -77,6 +77,7 @@ export const questions = pgTable('questions', {
   explanation:   text('explanation'),                 // AI-generated hint
   signImageUrl:  text('sign_image_url'),              // For ibyapa questions
   signSvg:       text('sign_svg'),                    // Inline SVG for signs
+  examGroup:     text('exam_group'),                  // 'sign'|'roadpic'|'number'|'analysis' — exam composition
   moduleId:      uuid('module_id').references(() => modules.id),
   createdAt:     timestamp('created_at').defaultNow(),
 });
