@@ -18,10 +18,10 @@ export default auth((req) => {
   }
 
   if (isAdmin) {
+    // Only require being logged in here. The admin ROLE is verified against the
+    // DB in the (admin) layout + server actions, so a stale token role (e.g. an
+    // older login on another device) can't lock a real admin out of /admin.
     if (!session) return NextResponse.redirect(new URL('/login', req.url));
-    if ((session.user as any)?.role !== 'admin') {
-      return NextResponse.redirect(new URL('/dashboard', req.url));
-    }
   }
 
   return NextResponse.next();

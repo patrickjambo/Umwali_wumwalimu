@@ -1,16 +1,9 @@
 "use server";
-import { auth } from "@/lib/auth";
 import { db } from "@/db";
 import { users, appSettings } from "@/db/schema";
 import { eq, and, or, ne, lt, isNull } from "drizzle-orm";
 import { revalidatePath } from "next/cache";
-
-async function requireAdmin() {
-  const session = await auth();
-  if ((session?.user as { role?: string } | undefined)?.role !== "admin") {
-    throw new Error("forbidden");
-  }
-}
+import { requireAdmin } from "@/lib/admin-guard";
 
 export async function setUserActive(userId: string, active: boolean) {
   await requireAdmin();

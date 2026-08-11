@@ -1,4 +1,5 @@
 import { auth } from "@/lib/auth";
+import { currentUserRole } from "@/lib/admin-guard";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 import { TechBackground } from "@/components/layout/TechBackground";
@@ -12,9 +13,10 @@ const navItems = [
 
 export default async function AdminLayout({ children }: { children: React.ReactNode }) {
   const session = await auth();
-  if (!session || (session.user as { role?: string } | undefined)?.role !== "admin") {
-    redirect("/dashboard");
-  }
+  if (!session) redirect("/login");
+  // Check the role against the DB, not the token (which may be stale on another
+  // device), so a real admin is never bounced to /dashboard.
+  if ((await currentUserRole()) !== "admin") redirect("/dashboard");
 
   const signOutAction = async () => {
     "use server";

@@ -1,17 +1,12 @@
 "use server";
-import { auth } from "@/lib/auth";
 import { db } from "@/db";
 import { generatedExams, appSettings } from "@/db/schema";
 import { eq } from "drizzle-orm";
 import { getQuestionsIndex } from "@/lib/catalog";
 import { pickQuestionsForSeed, matchQuestionsByLines, fetchYouTubeHint } from "@/lib/exam-generator";
 import { runDailyExamFromSettings } from "@/lib/daily-exam";
+import { requireAdmin } from "@/lib/admin-guard";
 import { revalidatePath } from "next/cache";
-
-async function requireAdmin() {
-  const s = await auth();
-  if ((s?.user as { role?: string } | undefined)?.role !== "admin") throw new Error("forbidden");
-}
 
 // Generate an exam from OUR bank using a topic/video seed.
 export async function generateExamAction(formData: FormData) {
